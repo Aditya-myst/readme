@@ -42,39 +42,87 @@ export default function LandingPage() {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative pt-48 pb-32 px-4 flex flex-col items-center text-center min-h-[95vh] justify-start max-w-[1400px] mx-auto z-10">
+      <section className="relative pt-40 pb-0 px-4 flex flex-col items-center text-center w-full max-w-[1400px] mx-auto z-10 min-h-screen">
         
-        {/* Subtitle Pill */}
+        {/* Central Content Container */}
+        <div className="relative z-20 flex flex-col items-center max-w-[1000px] mx-auto w-full mt-10">
+          {/* Subtitle Pill */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#1A1A1A]/80 border border-white/10 text-[15px] font-medium mb-10 text-[#CCCCCC]"
+          >
+            <Sparkles className="w-4 h-4 text-[#FFB800]" /> Ultimate Profile README Generator
+          </motion.div>
+
+          {/* Main Headline */}
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="text-[52px] md:text-[76px] font-medium tracking-tight w-full leading-[1.05] mb-8"
+          >
+            Stand Out. <br />
+            Without Writing <br />
+            Markdown.
+          </motion.h1>
+        </div>
+
+        {/* Center Bottom: Editor Mockup (Moved into document flow) */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 100 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#1A1A1A]/80 border border-white/10 text-[15px] font-medium mb-10 text-[#CCCCCC]"
+          transition={{ duration: 1, delay: 0.3, type: "spring" }}
+          className="relative mt-20 w-full max-w-[800px] h-[400px] bg-[#222] rounded-t-[40px] border-[8px] border-[#333] border-b-0 shadow-2xl overflow-hidden hidden md:block z-20"
         >
-          <Sparkles className="w-4 h-4 text-[#FFB800]" /> Ultimate Profile README Generator
+           <div className="w-full h-full bg-[#111] relative pt-8 px-10">
+              <div className="text-center mb-8">
+                 <h3 className="text-2xl font-medium text-white mb-2">Visual Editor for<br/>stunning READMEs</h3>
+              </div>
+              
+              <div className="w-full h-full bg-[#1A1A1A] rounded-t-2xl border border-white/5 p-4 relative flex gap-4">
+                 <div className="absolute right-8 top-16 bg-[#10B981] text-black text-[10px] font-bold px-3 py-1.5 rounded-sm rotate-[15deg] z-20">
+                   Live HTML Render
+                 </div>
+                 
+                 {/* App Panel 1 */}
+                 <div className="flex-1 border-r border-white/10 pr-4">
+                   <div className="flex justify-between items-center mb-6 border-b border-white/5 pb-4">
+                     <div className="text-sm font-medium flex items-center gap-2"><LayoutTemplate className="w-4 h-4 text-[#8B5CF6]"/> Components</div>
+                   </div>
+                   <div className="space-y-3">
+                      <div className="w-full h-10 bg-[#222] rounded-lg flex items-center px-3 text-xs text-[#888]">Github Stats Widget</div>
+                      <div className="w-full h-10 bg-[#222] rounded-lg flex items-center px-3 text-xs text-[#888]">Top Languages API</div>
+                      <div className="w-full h-10 bg-[#222] rounded-lg flex items-center px-3 text-xs text-[#888]">Shields.io Social Badges</div>
+                   </div>
+                 </div>
+
+                 {/* App Panel 2 */}
+                 <div className="flex-[2] pl-2">
+                   <div className="flex justify-between items-center mb-6 border-b border-white/5 pb-4">
+                     <div className="text-sm font-medium flex items-center gap-2"><Code2 className="w-4 h-4 text-[#FF4D2D]"/> Preview</div>
+                   </div>
+                   <div className="w-full h-32 bg-white rounded-xl flex items-center justify-center p-4 shadow-inner">
+                       <div className="w-full h-full border border-dashed border-[#ccc] rounded-lg flex flex-col items-center justify-center text-xs text-[#888] gap-2">
+                         <img src="https://img.shields.io/badge/Rendered-Markdown-success?style=flat" alt="mock badge" />
+                         Drag widgets here
+                       </div>
+                   </div>
+                 </div>
+              </div>
+           </div>
         </motion.div>
 
-        {/* Main Headline */}
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-[64px] md:text-[88px] font-medium tracking-tight max-w-[1000px] leading-[1.05] mb-8"
-        >
-          Stand Out. <br />
-          Without Writing <br />
-          Markdown.
-        </motion.h1>
-
         {/* Hero Floating Widgets */}
-        <div className="absolute inset-0 pointer-events-none z-0">
+        <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden lg:overflow-visible">
           
           {/* Top Left: Floating Markdown Snippet */}
           <motion.div
             initial={{ opacity: 0, y: 50, x: -20, rotate: -5 }}
             animate={{ opacity: 1, y: 0, x: 0, rotate: 0 }}
             transition={{ duration: 1, delay: 0.4, type: "spring" }}
-            className="absolute top-[20%] left-[8%] hidden lg:block"
+            className="absolute top-[12%] left-[-2%] xl:left-[2%] 2xl:left-[6%] hidden lg:block scale-[0.8] xl:scale-100 origin-top-left"
           >
             <div className="absolute -top-12 -right-12 w-32 h-32 bg-[#F3F4F6] rounded-full flex items-center justify-center shadow-lg">
               <div className="w-8 h-8 bg-[#8B5CF6] rounded-lg flex items-center justify-center" style={{ transform: "rotate(15deg) skewX(-10deg)" }}>
@@ -84,7 +132,7 @@ export default function LandingPage() {
             
             <motion.div 
               whileHover={{ y: -5 }}
-              className="relative w-[220px] bg-[#1A1A1A] rounded-2xl p-5 shadow-2xl border border-white/10 backdrop-blur-md"
+              className="relative w-[220px] bg-[#1A1A1A] rounded-2xl p-5 shadow-2xl border border-white/10 backdrop-blur-md pointer-events-auto"
             >
               <div className="flex justify-between items-start mb-4">
                 <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm">
@@ -107,7 +155,7 @@ export default function LandingPage() {
           <motion.div
             animate={{ y: [0, -10, 0] }}
             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-            className="absolute bottom-[20%] left-[12%] hidden xl:block"
+            className="absolute top-[45%] left-[-2%] xl:left-[2%] 2xl:left-[6%] hidden lg:block scale-[0.8] xl:scale-100 origin-left"
           >
             <motion.div 
               whileHover={{ scale: 1.02 }}
@@ -148,7 +196,7 @@ export default function LandingPage() {
           <motion.div
             animate={{ y: [0, -10, 0] }}
             transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-            className="absolute top-[25%] right-[10%] hidden lg:block"
+            className="absolute top-[18%] right-[-2%] xl:right-[2%] 2xl:right-[6%] hidden lg:block scale-[0.8] xl:scale-100 origin-top-right"
           >
             <motion.div 
               whileHover={{ scale: 1.02 }}
@@ -185,7 +233,7 @@ export default function LandingPage() {
           </motion.div>
 
           {/* Bottom Right: Blue Circle */}
-          <div className="absolute bottom-[10%] right-[8%] hidden xl:flex flex-col items-end gap-6 pointer-events-auto">
+          <div className="absolute top-[52%] right-[-2%] xl:right-[2%] 2xl:right-[6%] hidden xl:flex flex-col items-end gap-6 pointer-events-auto scale-[0.8] xl:scale-100 origin-right">
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
