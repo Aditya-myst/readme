@@ -23,7 +23,7 @@ export default function EditorPage() {
     // Convert markdown to HTML for live preview
     const rawHtml = marked.parse(markdownContent);
     // Sanitize the HTML before rendering
-    const cleanHtml = DOMPurify.sanitize(rawHtml as string);
+    const cleanHtml = typeof window !== 'undefined' ? DOMPurify.sanitize(rawHtml as string) : rawHtml as string;
     setHtmlPreview(cleanHtml);
   }, [markdownContent]);
 

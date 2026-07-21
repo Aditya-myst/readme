@@ -8,7 +8,11 @@ export default function LandingPage() {
   return (
     <div className="relative min-h-screen bg-[#0A0A0A] text-white selection:bg-[#FF4D2D] selection:text-white font-sans antialiased overflow-hidden">
       {/* Soft Top Glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-white/5 blur-[120px] rounded-full pointer-events-none" />
+      <motion.div 
+        animate={{ opacity: [0.5, 0.8, 0.5], scale: [1, 1.05, 1] }}
+        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-white/5 blur-[120px] rounded-full pointer-events-none" 
+      />
 
       {/* Navigation */}
       <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50 flex items-center justify-between pr-2 pl-6 py-2 rounded-full backdrop-blur-xl bg-[#1A1A1A]/80 border border-white/10 shadow-2xl min-w-[500px]">
@@ -21,9 +25,13 @@ export default function LandingPage() {
           <Link href="https://github.com" target="_blank" className="hover:text-white transition-colors">GitHub</Link>
         </div>
         <Link href="/editor">
-          <button className="rounded-full px-6 py-2.5 bg-[#FF4D2D] text-white hover:bg-[#e03d20] font-medium text-[14px] transition-colors cursor-pointer">
+          <motion.button 
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="rounded-full px-6 py-2.5 bg-[#FF4D2D] text-white hover:bg-[#e03d20] font-medium text-[14px] transition-colors cursor-pointer"
+          >
             Open Editor
-          </button>
+          </motion.button>
         </Link>
       </nav>
 
@@ -70,7 +78,10 @@ export default function LandingPage() {
             </div>
             
             {/* Main Widget */}
-            <div className="relative w-[180px] bg-[#1A1A1A] rounded-2xl p-4 shadow-2xl border border-white/10 backdrop-blur-md">
+            <motion.div 
+              whileHover={{ y: -5 }}
+              className="relative w-[180px] bg-[#1A1A1A] rounded-2xl p-4 shadow-2xl border border-white/10 backdrop-blur-md"
+            >
               <div className="flex justify-between items-start mb-6">
                 <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm">
                   <span className="text-xl">🛠️</span>
@@ -83,17 +94,19 @@ export default function LandingPage() {
                  <div className="w-full h-[45%] bg-[#333] rounded-sm" />
                  <div className="w-full h-[90%] bg-[#FF4D2D] rounded-sm" />
               </div>
-            </div>
+            </motion.div>
           </motion.div>
 
           {/* Bottom Left: Streak Mock */}
           <motion.div
-            initial={{ opacity: 0, y: 30, x: -30 }}
-            animate={{ opacity: 1, y: 0, x: 0 }}
-            transition={{ duration: 1, delay: 0.5, type: "spring" }}
+            animate={{ y: [0, -10, 0] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
             className="absolute bottom-[20%] left-[12%] hidden xl:block"
           >
-            <div className="w-[280px] bg-[#161616] rounded-2xl p-5 shadow-2xl border border-white/5 relative">
+            <motion.div 
+              whileHover={{ scale: 1.02 }}
+              className="w-[280px] bg-[#161616] rounded-2xl p-5 shadow-2xl border border-white/5 relative"
+            >
               <div className="text-[13px] font-medium text-[#888] mb-6">Commit Graph Preview</div>
               
               {/* Line chart mock */}
@@ -124,17 +137,19 @@ export default function LandingPage() {
                  </div>
                  <div className="text-xl font-bold text-white">42 days</div>
               </div>
-            </div>
+            </motion.div>
           </motion.div>
 
           {/* Top Right: Languages Widget */}
           <motion.div
-            initial={{ opacity: 0, y: -40, x: 40 }}
-            animate={{ opacity: 1, y: 0, x: 0 }}
-            transition={{ duration: 1, delay: 0.5, type: "spring" }}
+            animate={{ y: [0, -10, 0] }}
+            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
             className="absolute top-[25%] right-[10%] hidden lg:block"
           >
-            <div className="w-[280px] bg-[#161616] rounded-2xl p-5 shadow-2xl border border-white/5">
+            <motion.div 
+              whileHover={{ scale: 1.02 }}
+              className="w-[280px] bg-[#161616] rounded-2xl p-5 shadow-2xl border border-white/5"
+            >
               <div className="text-[13px] font-medium text-white mb-6">Top Languages</div>
               <div className="flex items-end justify-between gap-1.5 h-28 relative">
                 {[
@@ -162,7 +177,7 @@ export default function LandingPage() {
               <div className="flex justify-between mt-3 text-[9px] text-[#555] font-medium uppercase tracking-wider">
                 <span>Python</span><span>Go</span><span>Rust</span><span>TS</span><span>JS</span><span>C++</span><span>Java</span>
               </div>
-            </div>
+            </motion.div>
           </motion.div>
 
           {/* Bottom Right: Blue Circle & Purple Pill */}
@@ -185,9 +200,13 @@ export default function LandingPage() {
               transition={{ duration: 0.6, delay: 0.8 }}
             >
               <Link href="/editor">
-                <button className="bg-[#8B5CF6] hover:bg-[#7C3AED] text-white px-6 py-4 rounded-full font-medium flex items-center gap-3 transition-colors shadow-xl text-[15px] cursor-pointer">
+                <motion.button 
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="bg-[#8B5CF6] hover:bg-[#7C3AED] text-white px-6 py-4 rounded-full font-medium flex items-center gap-3 transition-colors shadow-xl text-[15px] cursor-pointer"
+                >
                   Launch Editor <ArrowUpRight className="w-4 h-4" />
-                </button>
+                </motion.button>
               </Link>
             </motion.div>
           </div>
