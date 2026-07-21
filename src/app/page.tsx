@@ -388,6 +388,44 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* Templates Showcase Section */}
+      <section className="py-32 px-8 max-w-7xl mx-auto" id="templates">
+        <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+          <div>
+            <h2 className="text-4xl md:text-5xl font-medium mb-6 tracking-tight text-white">Curated Templates</h2>
+            <p className="text-[#888888] text-lg max-w-xl">Start with a stunning foundation. Our templates are reverse-engineered from top developers and completely free to use.</p>
+          </div>
+          <Link href="/editor">
+            <button className="rounded-full border border-[#333] hover:bg-[#111] text-white bg-transparent h-12 px-6 font-medium transition-colors cursor-pointer">
+              Try them in Editor
+            </button>
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {[
+            { name: "Minimalist", desc: "Clean text, bullet points, basic links.", color: "bg-[#1A1A1A]" },
+            { name: "Developer Pro", desc: "GitHub stats cards and neat badges.", color: "bg-[#2D1B4E]" },
+            { name: "Influencer", desc: "sw-yx style: High density, endorsements.", color: "bg-[#182944]" },
+            { name: "Power User", desc: "DenverCoder1 style: Typing header, toggles.", color: "bg-[#451F1F]" },
+            { name: "90s Retro", desc: "Fun, nostalgic GIFs and guestbooks.", color: "bg-[#1D2B23]" },
+          ].map((template, idx) => (
+            <div key={idx} className="group cursor-pointer">
+              <div className={`w-full aspect-[4/3] rounded-2xl ${template.color} mb-4 relative overflow-hidden border border-white/5 transition-transform duration-300 group-hover:scale-[1.02] flex items-center justify-center`}>
+                <div className="text-white/20 font-bold text-2xl">{template.name}</div>
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 bg-black/60 backdrop-blur-sm transition-opacity">
+                  <Link href="/editor">
+                    <button className="rounded-full bg-white text-black px-6 py-2 font-medium hover:bg-gray-200 transition-colors cursor-pointer">Use Template</button>
+                  </Link>
+                </div>
+              </div>
+              <h3 className="font-semibold text-lg text-white">{template.name}</h3>
+              <p className="text-[#666] text-sm mt-1">{template.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* Footer */}
       <footer className="py-12 px-8 max-w-[1400px] mx-auto border-t border-[#111]">
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
