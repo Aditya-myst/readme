@@ -1,43 +1,56 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Panel, Group, Separator } from "react-resizable-panels";
 import { useProfileStore } from "@/store/profileStore";
-import { Settings, Eye, Code2, GripVertical, FileJson } from "lucide-react";
+import { templates } from "@/lib/templates";
+import { Settings, Eye, Code2, FileJson, LayoutTemplate, Copy, Check } from "lucide-react";
 import Editor from "@monaco-editor/react";
+import { marked } from "marked";
+import DOMPurify from "dompurify";
+import Link from "next/link";
 
 export default function EditorPage() {
-  const { username, widgets, setUsername } = useProfileStore();
-  const [activeTab, setActiveTab] = useState<"widgets" | "profile">("profile");
+  const profileState = useProfileStore();
+  const [activeTab, setActiveTab] = useState<"content" | "templates">("content");
+  const [copied, setCopied] = useState(false);
+  const [htmlPreview, setHtmlPreview] = useState("");
 
-  // A basic markdown generator based on state
-  const generateMarkdown = () => {
-    let md = `# Hi there, I'm ${username} 👋\n\n`;
-    
-    widgets.forEach(w => {
-      if (w.type === 'github-stats') {
-        md += `[![GitHub Stats](https://github-readme-stats.vercel.app/api?username=${w.username}&theme=${w.theme}&show_icons=true)]()\n\n`;
-      } else if (w.type === 'top-languages') {
-        md += `[![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=${w.username}&theme=${w.theme}&layout=compact)]()\n\n`;
-      }
-    });
+  const currentTemplate = templates[profileState.template];
+  const markdownContent = currentTemplate.render(profileState);
 
-    return md;
+  useEffect(() => {
+    // Convert markdown to HTML for live preview
+    const rawHtml = marked.parse(markdownContent);
+    // Sanitize the HTML before rendering
+    const cleanHtml = DOMPurify.sanitize(rawHtml as string);
+    setHtmlPreview(cleanHtml);
+  }, [markdownContent]);
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(markdownContent);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   };
 
-  const markdownContent = generateMarkdown();
-
   return (
-    <div className="h-screen w-full bg-background flex flex-col overflow-hidden">
+    <div className="h-screen w-full bg-[#050505] text-white flex flex-col overflow-hidden selection:bg-[#FF4D2D] selection:text-white">
       {/* Editor Header */}
-      <header className="h-14 border-b border-border/50 flex items-center justify-between px-4 bg-card/30 backdrop-blur-md z-10">
-        <div className="flex items-center gap-2 font-bold tracking-tight">
-          <FileJson className="w-5 h-5 text-primary" /> ProfileForge
+      <header className="h-16 border-b border-white/10 flex items-center justify-between px-6 bg-[#111] z-10">
+        <div className="flex items-center gap-6">
+          <Link href="/" className="flex items-center gap-2 font-bold tracking-tight text-lg hover:text-[#FF4D2D] transition-colors">
+            <LayoutTemplate className="w-5 h-5 text-[#FF4D2D]" /> ProfileForge
+          </Link>
+          <div className="h-4 w-px bg-white/20"></div>
+          <span className="text-sm font-medium text-white/50">Editor</span>
         </div>
-        <div className="flex gap-2">
-          {/* Actions */}
-          <button className="px-4 py-1.5 text-sm font-medium bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors">
-            Export README
+        <div className="flex gap-4">
+          <button 
+            onClick={handleCopy}
+            className="px-5 py-2 text-sm font-semibold bg-[#FF4D2D] text-white rounded-md hover:bg-[#e03d20] transition-colors flex items-center gap-2"
+          >
+            {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+            {copied ? "Copied!" : "Copy README"}
           </button>
         </div>
       </header>
@@ -47,108 +60,163 @@ export default function EditorPage() {
         <Group orientation="horizontal">
           
           {/* Left Panel: Configuration */}
-          <Panel defaultSize={20} minSize={15} maxSize={30} className="bg-card/20 border-r border-border/50 flex flex-col">
-            <div className="h-10 border-b border-border/50 flex items-center px-4 gap-2 text-sm font-medium text-muted-foreground bg-muted/20">
-              <Settings className="w-4 h-4" /> Configuration
-            </div>
-            
-            {/* Sidebar Tabs */}
-            <div className="flex border-b border-border/50">
+          <Panel defaultSize={25} minSize={20} maxSize={35} className="bg-[#0A0A0A] flex flex-col">
+            <div className="flex border-b border-white/10">
               <button 
-                onClick={() => setActiveTab("profile")}
-                className={`flex-1 py-2 text-xs font-semibold ${activeTab === "profile" ? "text-primary border-b-2 border-primary" : "text-muted-foreground hover:text-foreground"}`}
+                onClick={() => setActiveTab("content")}
+                className={`flex-1 py-3 text-xs font-bold tracking-wider uppercase flex items-center justify-center gap-2 ${activeTab === "content" ? "text-[#FF4D2D] border-b-2 border-[#FF4D2D] bg-white/5" : "text-white/50 hover:text-white hover:bg-white/5"}`}
               >
-                Profile
+                <Settings className="w-4 h-4" /> Content
               </button>
               <button 
-                onClick={() => setActiveTab("widgets")}
-                className={`flex-1 py-2 text-xs font-semibold ${activeTab === "widgets" ? "text-primary border-b-2 border-primary" : "text-muted-foreground hover:text-foreground"}`}
+                onClick={() => setActiveTab("templates")}
+                className={`flex-1 py-3 text-xs font-bold tracking-wider uppercase flex items-center justify-center gap-2 ${activeTab === "templates" ? "text-[#FF4D2D] border-b-2 border-[#FF4D2D] bg-white/5" : "text-white/50 hover:text-white hover:bg-white/5"}`}
               >
-                Widgets
+                <LayoutTemplate className="w-4 h-4" /> Templates
               </button>
             </div>
 
-            <div className="p-4 flex-1 overflow-y-auto custom-scrollbar">
-              {activeTab === "profile" && (
-                <div className="space-y-4">
-                  <div>
-                    <label className="text-xs font-semibold text-muted-foreground mb-1.5 block">GitHub Username</label>
-                    <input 
-                      type="text" 
-                      value={username}
-                      onChange={(e) => setUsername(e.target.value)}
-                      className="w-full bg-background border border-border rounded-md px-3 py-1.5 text-sm focus:outline-none focus:ring-1 focus:ring-primary"
-                    />
+            <div className="p-6 flex-1 overflow-y-auto space-y-6">
+              {activeTab === "content" && (
+                <>
+                  <div className="space-y-4">
+                    <h3 className="text-sm font-bold text-white uppercase tracking-wider mb-4">Personal Info</h3>
+                    
+                    <div>
+                      <label className="text-xs font-medium text-white/60 mb-1.5 block">Full Name</label>
+                      <input 
+                        type="text" 
+                        value={profileState.name}
+                        onChange={(e) => profileState.updateField('name', e.target.value)}
+                        className="w-full bg-[#111] border border-white/10 rounded-md px-3 py-2 text-sm focus:outline-none focus:border-[#FF4D2D] transition-colors"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="text-xs font-medium text-white/60 mb-1.5 block">Tagline</label>
+                      <input 
+                        type="text" 
+                        value={profileState.tagline}
+                        onChange={(e) => profileState.updateField('tagline', e.target.value)}
+                        className="w-full bg-[#111] border border-white/10 rounded-md px-3 py-2 text-sm focus:outline-none focus:border-[#FF4D2D] transition-colors"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="text-xs font-medium text-white/60 mb-1.5 block">About Me</label>
+                      <textarea 
+                        rows={3}
+                        value={profileState.about}
+                        onChange={(e) => profileState.updateField('about', e.target.value)}
+                        className="w-full bg-[#111] border border-white/10 rounded-md px-3 py-2 text-sm focus:outline-none focus:border-[#FF4D2D] transition-colors resize-none"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="text-xs font-medium text-white/60 mb-1.5 block">Skills (Comma Separated)</label>
+                      <input 
+                        type="text" 
+                        value={profileState.skills}
+                        onChange={(e) => profileState.updateField('skills', e.target.value)}
+                        className="w-full bg-[#111] border border-white/10 rounded-md px-3 py-2 text-sm focus:outline-none focus:border-[#FF4D2D] transition-colors"
+                      />
+                    </div>
                   </div>
-                </div>
+
+                  <div className="space-y-4 pt-4 border-t border-white/10">
+                    <h3 className="text-sm font-bold text-white uppercase tracking-wider mb-4">Social Links</h3>
+                    
+                    <div>
+                      <label className="text-xs font-medium text-white/60 mb-1.5 block">GitHub Username</label>
+                      <input 
+                        type="text" 
+                        value={profileState.github}
+                        onChange={(e) => profileState.updateField('github', e.target.value)}
+                        className="w-full bg-[#111] border border-white/10 rounded-md px-3 py-2 text-sm focus:outline-none focus:border-[#FF4D2D] transition-colors"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="text-xs font-medium text-white/60 mb-1.5 block">Twitter Handle</label>
+                      <input 
+                        type="text" 
+                        value={profileState.twitter}
+                        onChange={(e) => profileState.updateField('twitter', e.target.value)}
+                        className="w-full bg-[#111] border border-white/10 rounded-md px-3 py-2 text-sm focus:outline-none focus:border-[#FF4D2D] transition-colors"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="text-xs font-medium text-white/60 mb-1.5 block">LinkedIn Username</label>
+                      <input 
+                        type="text" 
+                        value={profileState.linkedin}
+                        onChange={(e) => profileState.updateField('linkedin', e.target.value)}
+                        className="w-full bg-[#111] border border-white/10 rounded-md px-3 py-2 text-sm focus:outline-none focus:border-[#FF4D2D] transition-colors"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="text-xs font-medium text-white/60 mb-1.5 block">Website URL</label>
+                      <input 
+                        type="text" 
+                        value={profileState.website}
+                        onChange={(e) => profileState.updateField('website', e.target.value)}
+                        className="w-full bg-[#111] border border-white/10 rounded-md px-3 py-2 text-sm focus:outline-none focus:border-[#FF4D2D] transition-colors"
+                      />
+                    </div>
+                  </div>
+                </>
               )}
-              {activeTab === "widgets" && (
-                <div className="space-y-2">
-                  <div className="text-xs text-muted-foreground mb-2">Drag to reorder widgets</div>
-                  {widgets.map((w, idx) => (
-                    <div key={w.id} className="p-3 bg-background border border-border/50 rounded-md flex items-center gap-2 cursor-pointer hover:border-primary/50 transition-colors">
-                      <GripVertical className="w-4 h-4 text-muted-foreground" />
-                      <div className="text-sm font-medium">{w.type.replace('-', ' ')}</div>
+
+              {activeTab === "templates" && (
+                <div className="space-y-3">
+                  <div className="text-xs text-white/50 mb-4">Select a base layout. Your content will be injected automatically.</div>
+                  
+                  {Object.entries(templates).map(([key, tpl]) => (
+                    <div 
+                      key={key}
+                      onClick={() => profileState.updateField('template', key as any)}
+                      className={`p-4 rounded-xl border cursor-pointer transition-all ${profileState.template === key ? 'bg-[#FF4D2D]/10 border-[#FF4D2D]' : 'bg-[#111] border-white/5 hover:border-white/20'}`}
+                    >
+                      <h4 className="font-bold text-sm text-white mb-1">{tpl.title}</h4>
+                      <p className="text-xs text-white/50">Click to apply this theme</p>
                     </div>
                   ))}
-                  <button className="w-full py-2 border border-dashed border-border/80 rounded-md text-xs font-medium hover:border-primary hover:text-primary transition-colors mt-4">
-                    + Add Widget
-                  </button>
                 </div>
               )}
             </div>
           </Panel>
 
-          <Separator className="w-1 bg-border/30 hover:bg-primary transition-colors cursor-col-resize" />
+          <Separator className="w-1 bg-[#222] hover:bg-[#FF4D2D] transition-colors cursor-col-resize" />
 
           {/* Middle Panel: Live Preview */}
-          <Panel defaultSize={50} minSize={30}>
-            <div className="h-full flex flex-col bg-background/50">
-              <div className="h-10 border-b border-border/50 flex items-center px-4 gap-2 text-sm font-medium text-muted-foreground bg-muted/20">
-                <Eye className="w-4 h-4" /> Live Preview
+          <Panel defaultSize={45} minSize={30}>
+            <div className="h-full flex flex-col bg-[#0A0A0A]">
+              <div className="h-10 border-b border-white/10 flex items-center px-4 gap-2 text-xs font-bold uppercase tracking-wider text-white/50 bg-[#111]">
+                <Eye className="w-4 h-4" /> Visual Preview
               </div>
-              <div className="flex-1 p-8 overflow-y-auto custom-scrollbar">
-                <div className="max-w-3xl mx-auto bg-card border border-border/50 rounded-xl p-8 shadow-xl">
-                  <h1 className="text-3xl font-bold mb-6">Hi there, I'm {username} 👋</h1>
-                  
-                  <div className="space-y-4 flex flex-col items-start">
-                    {widgets.map(w => {
-                      if (w.type === 'github-stats') {
-                        return (
-                          <img 
-                            key={w.id} 
-                            src={`https://github-readme-stats.vercel.app/api?username=${w.username || username}&theme=${w.theme}&show_icons=true`} 
-                            alt="GitHub Stats" 
-                            className="rounded-md"
-                          />
-                        );
-                      }
-                      if (w.type === 'top-languages') {
-                        return (
-                          <img 
-                            key={w.id} 
-                            src={`https://github-readme-stats.vercel.app/api/top-langs/?username=${w.username || username}&theme=${w.theme}&layout=compact`} 
-                            alt="Top Languages"
-                            className="rounded-md" 
-                          />
-                        );
-                      }
-                      return null;
-                    })}
-                  </div>
-                </div>
+              <div className="flex-1 p-8 overflow-y-auto custom-scrollbar bg-[#050505]">
+                {/* Visual Preview Container */}
+                <div 
+                  className="max-w-3xl mx-auto bg-white text-black rounded-xl p-8 shadow-2xl markdown-body min-h-full"
+                  dangerouslySetInnerHTML={{ __html: htmlPreview }}
+                  style={{
+                    fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif'
+                  }}
+                />
               </div>
             </div>
           </Panel>
 
-          <Separator className="w-1 bg-border/30 hover:bg-primary transition-colors cursor-col-resize" />
+          <Separator className="w-1 bg-[#222] hover:bg-[#FF4D2D] transition-colors cursor-col-resize" />
 
           {/* Right Panel: Markdown Editor */}
-          <Panel defaultSize={30} minSize={15} maxSize={40} className="bg-card/20 border-l border-border/50 flex flex-col">
-            <div className="h-10 border-b border-border/50 flex items-center px-4 gap-2 text-sm font-medium text-muted-foreground bg-muted/20">
-              <Code2 className="w-4 h-4" /> Markdown Source
+          <Panel defaultSize={30} minSize={20} className="bg-[#0A0A0A] flex flex-col">
+            <div className="h-10 border-b border-white/10 flex items-center px-4 gap-2 text-xs font-bold uppercase tracking-wider text-white/50 bg-[#111]">
+              <Code2 className="w-4 h-4" /> Source Code
             </div>
-            <div className="flex-1 relative">
+            <div className="flex-1 relative bg-[#0A0A0A]">
               <Editor
                 height="100%"
                 defaultLanguage="markdown"
@@ -157,16 +225,44 @@ export default function EditorPage() {
                 options={{
                   minimap: { enabled: false },
                   wordWrap: "on",
-                  readOnly: true,
+                  readOnly: true, // In V2 we can make this editable, but for now it's auto-generated from template
                   padding: { top: 16 },
                   fontSize: 13,
                   fontFamily: "var(--font-mono)",
+                  scrollBeyondLastLine: false,
                 }}
               />
             </div>
           </Panel>
         </Group>
       </div>
+      
+      {/* Basic styles for the injected markdown preview */}
+      <style dangerouslySetInnerHTML={{__html: `
+        .markdown-body h1, .markdown-body h2, .markdown-body h3 {
+          border-bottom: 1px solid #eaecef;
+          padding-bottom: 0.3em;
+          margin-bottom: 16px;
+          margin-top: 24px;
+        }
+        .markdown-body p {
+          margin-bottom: 16px;
+        }
+        .markdown-body img {
+          max-width: 100%;
+        }
+        .markdown-body a {
+          color: #0969da;
+          text-decoration: none;
+        }
+        .markdown-body code {
+          background-color: rgba(175,184,193,0.2);
+          padding: 0.2em 0.4em;
+          border-radius: 6px;
+          font-family: monospace;
+          font-size: 85%;
+        }
+      `}} />
     </div>
   );
 }
