@@ -1,222 +1,400 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Globe, LayoutTemplate, Zap, ArrowUpRight, CheckCircle2, ChevronRight } from "lucide-react";
+import { ArrowUpRight, Zap, Orbit, TrendingUp } from "lucide-react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 
 export default function LandingPage() {
   return (
-    <div className="relative min-h-screen bg-[#050505] text-white selection:bg-[#FF4D2D] selection:text-white font-sans antialiased">
+    <div className="relative min-h-screen bg-[#0A0A0A] text-white selection:bg-[#FF4D2D] selection:text-white font-sans antialiased overflow-hidden">
+      {/* Soft Top Glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-white/5 blur-[120px] rounded-full pointer-events-none" />
+
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-5 mx-auto max-w-7xl backdrop-blur-md bg-[#050505]/80 border-b border-white/5">
-        <div className="flex items-center gap-3">
-          <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
-            <LayoutTemplate className="w-5 h-5 text-black" />
-          </div>
-          <span className="font-bold text-xl tracking-tight">ProfileForge</span>
+      <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50 flex items-center justify-between pr-2 pl-6 py-2 rounded-full backdrop-blur-xl bg-[#1A1A1A]/80 border border-white/10 shadow-2xl min-w-[500px]">
+        <div className="flex items-center gap-2 pr-6 border-r border-white/10">
+          <Orbit className="w-6 h-6 text-white" />
         </div>
-        <div className="hidden md:flex items-center gap-10 text-[15px] font-medium text-[#888888]">
-          <Link href="#features" className="hover:text-white transition-colors">Features</Link>
-          <Link href="#templates" className="hover:text-white transition-colors">Templates</Link>
-          <Link href="#showcase" className="hover:text-white transition-colors">Showcase</Link>
-          <Link href="#about" className="hover:text-white transition-colors">About</Link>
+        <div className="flex items-center gap-8 px-6 text-[14px] font-medium text-[#A0A0A0]">
+          <Link href="#cases" className="hover:text-white transition-colors">Cases</Link>
+          <Link href="#service" className="hover:text-white transition-colors">Service</Link>
+          <Link href="#blog" className="hover:text-white transition-colors">Blog</Link>
+          <Link href="#about" className="hover:text-white transition-colors">About us</Link>
         </div>
-        <div className="flex items-center gap-5">
-          <Link href="https://github.com" target="_blank" rel="noreferrer" className="text-[#888888] hover:text-white transition-colors">
-            <Globe className="w-5 h-5" />
-          </Link>
-          <Button className="rounded-full px-6 py-5 bg-[#FF4D2D] text-white hover:bg-[#e03d20] font-semibold border-none text-[15px]">
-            Get Started
-          </Button>
-        </div>
+        <button className="rounded-full px-6 py-2.5 bg-[#FF4D2D] text-white hover:bg-[#e03d20] font-medium text-[14px] transition-colors">
+          Contact
+        </button>
       </nav>
 
       {/* Hero Section */}
-      <section className="relative pt-40 pb-32 px-4 flex flex-col items-center text-center min-h-[90vh] justify-center max-w-7xl mx-auto">
+      <section className="relative pt-48 pb-32 px-4 flex flex-col items-center text-center min-h-[95vh] justify-start max-w-[1400px] mx-auto z-10">
+        
+        {/* Subtitle Pill */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="inline-flex items-center px-4 py-1.5 rounded-full bg-[#1A1A1A] border border-[#333] text-sm font-medium mb-12 text-[#AAAAAA]"
+          className="inline-flex items-center px-5 py-2 rounded-full bg-[#1A1A1A]/80 border border-white/10 text-[15px] font-medium mb-10 text-[#CCCCCC]"
         >
-          Visual GitHub Profile designer
+          Digital brand design agency
         </motion.div>
 
+        {/* Main Headline */}
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-6xl md:text-[85px] font-bold tracking-tight max-w-[1000px] leading-[1.05] mb-8"
+          className="text-[64px] md:text-[88px] font-medium tracking-tight max-w-[900px] leading-[1.05] mb-8"
         >
-          Design & Profile <br /> Acceleration <br /> for Developers
+          Design & Brand <br />
+          Acceleration <br />
+          for SaaS Startups
         </motion.h1>
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-lg md:text-xl text-[#888888] max-w-2xl mb-12 font-medium"
-        >
-          Build stunning GitHub READMEs visually without writing Markdown. Choose from premium templates, drag-and-drop widgets, and export instantly.
-        </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="flex items-center gap-4 relative z-20"
-        >
-          <Link href="/editor">
-            <Button size="lg" className="rounded-full px-10 h-16 text-lg bg-[#7C3AED] hover:bg-[#6D28D9] text-white group border-none font-semibold">
-              Open Editor
-              <ArrowUpRight className="ml-2 w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-            </Button>
-          </Link>
-          <Button size="lg" variant="outline" className="rounded-full px-10 h-16 text-lg border-[#333] text-white hover:bg-[#111] hover:text-white bg-transparent font-semibold">
-            View Templates
-          </Button>
-        </motion.div>
-
         {/* Hero Floating Widgets */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden max-w-[1400px] mx-auto z-10">
-          {/* Left Floating Widget (Like the Rocket card) */}
+        <div className="absolute inset-0 pointer-events-none z-0">
+          
+          {/* Top Left: White Circle + Rocket Widget */}
           <motion.div
-            initial={{ opacity: 0, y: 50, x: -20 }}
-            animate={{ opacity: 1, y: 0, x: 0 }}
-            transition={{ duration: 1, delay: 0.5, type: "spring", stiffness: 40 }}
-            className="absolute top-[30%] left-[5%] w-[180px] bg-[#121212] rounded-2xl p-4 shadow-2xl border border-[#222]"
+            initial={{ opacity: 0, y: 50, x: -20, rotate: -5 }}
+            animate={{ opacity: 1, y: 0, x: 0, rotate: 0 }}
+            transition={{ duration: 1, delay: 0.4, type: "spring" }}
+            className="absolute top-[20%] left-[8%] hidden lg:block"
           >
-            <div className="flex justify-between items-center mb-4">
-              <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center">
-                <span className="text-xl">🚀</span>
+            {/* White Circle Background Element */}
+            <div className="absolute -top-12 -right-12 w-32 h-32 bg-[#F3F4F6] rounded-full flex items-center justify-center shadow-lg">
+              <div className="w-8 h-8 bg-[#FF4D2D] rounded-lg flex items-center justify-center" style={{ transform: "rotate(15deg) skewX(-10deg)" }}>
+                 <TrendingUp className="w-5 h-5 text-white" />
               </div>
-              <div className="text-xs font-bold bg-[#1F1F1F] px-2 py-1 rounded-md">346+</div>
             </div>
-            <div className="flex items-end gap-1.5 h-12">
-               <div className="w-full h-[40%] bg-[#333] rounded-sm" />
-               <div className="w-full h-[70%] bg-[#333] rounded-sm" />
-               <div className="w-full h-[50%] bg-[#333] rounded-sm" />
-               <div className="w-full h-[90%] bg-[#FF4D2D] rounded-sm" />
+            
+            {/* Main Rocket Widget */}
+            <div className="relative w-[180px] bg-[#1A1A1A] rounded-2xl p-4 shadow-2xl border border-white/10 backdrop-blur-md">
+              <div className="flex justify-between items-start mb-6">
+                <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm">
+                  <span className="text-xl">🚀</span>
+                </div>
+                <div className="text-xs font-semibold bg-[#2A2A2A] text-white px-2.5 py-1 rounded-md">346+</div>
+              </div>
+              <div className="flex items-end gap-2 h-14 w-full">
+                 <div className="w-full h-[40%] bg-[#333] rounded-sm" />
+                 <div className="w-full h-[60%] bg-[#333] rounded-sm" />
+                 <div className="w-full h-[45%] bg-[#333] rounded-sm" />
+                 <div className="w-full h-[90%] bg-[#FF4D2D] rounded-sm" />
+              </div>
             </div>
           </motion.div>
 
-          {/* Right Floating Widget (Installs card) */}
+          {/* Bottom Left: Widget Control */}
           <motion.div
-            initial={{ opacity: 0, y: -50, x: 20 }}
+            initial={{ opacity: 0, y: 30, x: -30 }}
             animate={{ opacity: 1, y: 0, x: 0 }}
-            transition={{ duration: 1, delay: 0.6, type: "spring", stiffness: 40 }}
-            className="absolute top-[20%] right-[5%] w-[260px] bg-[#121212] rounded-2xl p-5 shadow-2xl border border-[#222]"
+            transition={{ duration: 1, delay: 0.5, type: "spring" }}
+            className="absolute bottom-[20%] left-[12%] hidden xl:block"
           >
-            <div className="text-sm font-medium mb-5">Profile Views</div>
-            <div className="flex items-end gap-1.5 h-[100px] relative">
-              <div className="w-full h-[50%] bg-[#222] rounded-t-sm" />
-              <div className="w-full h-[40%] bg-[#222] rounded-t-sm" />
-              <div className="w-full h-[60%] bg-[#222] rounded-t-sm" />
-              <div className="w-full h-[100%] bg-[#FFB800] rounded-t-sm flex flex-col justify-end pb-2 items-center">
-                <div className="absolute top-[-30px] bg-[#10B981] text-black text-[10px] font-bold px-1.5 py-0.5 rounded">952</div>
-                <div className="absolute top-[5px] bg-white text-black text-[10px] font-bold px-1.5 py-0.5 rounded">282</div>
+            <div className="w-[280px] bg-[#161616] rounded-2xl p-5 shadow-2xl border border-white/5 relative">
+              <div className="text-[13px] font-medium text-[#888] mb-6">Widget control</div>
+              
+              {/* Line chart mock */}
+              <div className="relative h-24 mb-4">
+                 {/* Faint vertical grid lines */}
+                 <div className="absolute inset-0 flex justify-between">
+                    <div className="w-px h-full bg-white/5" />
+                    <div className="w-px h-full bg-white/5" />
+                    <div className="w-px h-full bg-white/5" />
+                    <div className="w-px h-full bg-white/5" />
+                    <div className="w-px h-full bg-white/5" />
+                 </div>
+                 {/* Line */}
+                 <svg className="absolute inset-0 w-full h-full" preserveAspectRatio="none">
+                    <polyline points="0,70 30,65 60,30 100,30" fill="none" stroke="#FFB800" strokeWidth="2" />
+                    {/* Dots */}
+                    <circle cx="0" cy="70" r="3" fill="#FFB800" />
+                    <circle cx="30" cy="65" r="3" fill="#FFB800" />
+                    <circle cx="60" cy="30" r="3" fill="#FFB800" />
+                    <circle cx="100" cy="30" r="3" fill="#FFB800" />
+                 </svg>
               </div>
-              <div className="w-full h-[70%] bg-[#222] rounded-t-sm" />
-              <div className="w-full h-[50%] bg-[#222] rounded-t-sm" />
-              <div className="w-full h-[80%] bg-[#222] rounded-t-sm" />
-            </div>
-            <div className="flex justify-between mt-3 text-[10px] text-[#666] font-semibold">
-              <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+              <div className="flex justify-between text-[9px] text-[#555] font-medium uppercase tracking-wider mb-2">
+                <span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span>
+              </div>
+              
+              {/* Floating blue button */}
+              <div className="absolute -right-8 -bottom-6 bg-[#0066FF] rounded-xl p-3 shadow-xl">
+                 <div className="flex justify-between items-center gap-6 mb-1 text-white/80 text-[11px] font-medium">
+                   <span>Result</span>
+                   <TrendingUp className="w-3 h-3" />
+                 </div>
+                 <div className="text-xl font-bold text-white">+ 58%</div>
+              </div>
             </div>
           </motion.div>
 
-          {/* Bottom Right Blue Circle */}
+          {/* Top Right: Installs Widget */}
           <motion.div
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.7 }}
-            className="absolute bottom-[10%] right-[15%] w-[180px] h-[180px] bg-[#0066FF] rounded-full flex items-center justify-center text-center p-6"
+            initial={{ opacity: 0, y: -40, x: 40 }}
+            animate={{ opacity: 1, y: 0, x: 0 }}
+            transition={{ duration: 1, delay: 0.5, type: "spring" }}
+            className="absolute top-[25%] right-[10%] hidden lg:block"
           >
-            <div>
-              <div className="text-4xl font-bold text-white mb-1">+30%</div>
-              <div className="text-[11px] text-white/90 font-medium leading-tight">Speed up your productivity</div>
+            <div className="w-[280px] bg-[#161616] rounded-2xl p-5 shadow-2xl border border-white/5">
+              <div className="text-[13px] font-medium text-white mb-6">Installs</div>
+              <div className="flex items-end justify-between gap-1.5 h-28 relative">
+                {/* Mock bars */}
+                {[
+                  { height: "50%" },
+                  { height: "40%" },
+                  { height: "70%" },
+                  { height: "60%" },
+                  { height: "100%", isHighlight: true, top: "562", bottom: "286" },
+                  { height: "45%" },
+                  { height: "80%" }
+                ].map((bar, i) => (
+                  <div key={i} className="w-full relative h-full flex flex-col justify-end group">
+                    <div className="absolute inset-0 rounded-md border border-white/10 border-dashed opacity-30" />
+                    {bar.isHighlight ? (
+                      <div className="w-full bg-[#FFB800] rounded-md flex flex-col justify-between items-center py-1 z-10" style={{ height: bar.height }}>
+                        <div className="bg-white text-black text-[9px] font-bold px-1.5 py-0.5 rounded-sm absolute -top-6">562</div>
+                        <div className="bg-white text-black text-[9px] font-bold px-1.5 py-0.5 rounded-sm mt-1">286</div>
+                      </div>
+                    ) : (
+                      <div className={`w-full bg-[#2A2A2A] rounded-md z-10`} style={{ height: bar.height }} />
+                    )}
+                  </div>
+                ))}
+              </div>
+              <div className="flex justify-between mt-3 text-[9px] text-[#555] font-medium uppercase tracking-wider">
+                <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+              </div>
             </div>
+          </motion.div>
+
+          {/* Bottom Right: Blue Circle & Purple Pill */}
+          <div className="absolute bottom-[10%] right-[8%] hidden xl:flex flex-col items-end gap-6">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.6, type: "spring" }}
+              className="w-[180px] h-[180px] bg-[#0066FF] rounded-full flex items-center justify-center text-center p-6 shadow-2xl"
+            >
+              <div>
+                <div className="text-[40px] font-bold text-white leading-none mb-2">+30%</div>
+                <div className="text-[12px] text-white/90 font-medium leading-snug">Speed up your<br/>productivity</div>
+              </div>
+            </motion.div>
+            
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.8 }}
+            >
+              <Link href="/editor">
+                <button className="bg-[#8B5CF6] hover:bg-[#7C3AED] text-white px-6 py-4 rounded-full font-medium flex items-center gap-3 transition-colors shadow-xl text-[15px]">
+                  Book a call <ArrowUpRight className="w-4 h-4" />
+                </button>
+              </Link>
+            </motion.div>
+          </div>
+
+          {/* Center Bottom: Tablet Mockup */}
+          <motion.div
+            initial={{ opacity: 0, y: 100 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.3, type: "spring" }}
+            className="absolute bottom-[-15%] left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-[#222] rounded-t-[40px] border-[8px] border-[#333] border-b-0 shadow-2xl overflow-hidden hidden md:block"
+          >
+             {/* Tablet Screen Content */}
+             <div className="w-full h-full bg-[#111] relative pt-8 px-10">
+                <div className="text-center mb-8">
+                   <h3 className="text-2xl font-medium text-white mb-2">Crypto platform for<br/>smart loans</h3>
+                </div>
+                
+                {/* Inner App Mockup */}
+                <div className="w-full h-full bg-[#1A1A1A] rounded-t-2xl border border-white/5 p-4 relative">
+                   {/* Green tag overlay */}
+                   <div className="absolute right-8 top-16 bg-[#10B981] text-black text-[10px] font-bold px-3 py-1.5 rounded-sm rotate-[15deg] z-20">
+                     Analyze the<br/>market
+                   </div>
+                   
+                   {/* App header */}
+                   <div className="flex justify-between items-center mb-6 border-b border-white/5 pb-4">
+                     <div className="text-sm font-medium">Welcome back Alice</div>
+                   </div>
+                   
+                   {/* App stats */}
+                   <div className="flex gap-4 mb-4">
+                      <div className="flex-1 bg-[#222] rounded-xl p-3">
+                         <div className="text-[10px] text-[#888] mb-1">Active credit</div>
+                         <div className="text-sm font-bold">11,2 BTC</div>
+                      </div>
+                      <div className="flex-1 bg-[#222] rounded-xl p-3">
+                         <div className="text-[10px] text-[#888] mb-1">Payment goal</div>
+                         <div className="text-sm font-bold">26%</div>
+                      </div>
+                      <div className="flex-1 bg-[#222] rounded-xl p-3">
+                         <div className="text-[10px] text-[#888] mb-1">Price analytics</div>
+                         <div className="text-sm font-bold">$28,165</div>
+                      </div>
+                   </div>
+                   
+                   {/* App Chart Area */}
+                   <div className="w-full h-32 bg-[#222] rounded-xl flex items-end p-2 gap-1 overflow-hidden relative">
+                       {/* Mock bars inside app */}
+                       <div className="w-full h-[40%] bg-[#7C3AED] rounded-t-sm opacity-80" />
+                       <div className="w-full h-[60%] bg-[#7C3AED] rounded-t-sm opacity-80" />
+                       <div className="w-full h-[30%] bg-[#7C3AED] rounded-t-sm opacity-80" />
+                       <div className="w-full h-[80%] bg-[#7C3AED] rounded-t-sm opacity-80" />
+                       <div className="w-full h-[50%] bg-[#7C3AED] rounded-t-sm opacity-80" />
+                   </div>
+                </div>
+             </div>
           </motion.div>
         </div>
       </section>
 
       {/* Massive Typography Statement (Reference 3) */}
-      <section className="py-32 px-4 max-w-5xl mx-auto text-center border-t border-[#111]">
-        <h2 className="text-4xl md:text-[65px] font-bold leading-[1.1] tracking-tight text-white mb-8">
+      <section className="py-40 px-4 max-w-4xl mx-auto text-center relative z-10">
+        <h2 className="text-[40px] md:text-[56px] font-medium leading-[1.1] tracking-tight text-white mb-24">
           We prove, design, <br />
           implement, and market <br />
           your idea with absolute <br />
           transparency and <br />
-          efficiency in its <span className="text-[#666666]">core</span>
+          efficiency in it's <span className="text-[#888]">core</span>
         </h2>
+        
+        {/* $300m & 60+ Cards */}
+        <div className="flex flex-col md:flex-row gap-6 text-left">
+           <motion.div 
+             initial={{ opacity: 0, y: 20 }}
+             whileInView={{ opacity: 1, y: 0 }}
+             transition={{ duration: 0.6 }}
+             viewport={{ once: true }}
+             className="flex-1 bg-[#0F0F0F] rounded-3xl p-10 border border-white/5 shadow-2xl relative overflow-hidden"
+           >
+              <div className="absolute top-6 right-6 bg-[#1A1A1A] border border-white/10 rounded-full flex items-center pr-4 pl-1 py-1 gap-2">
+                 <div className="w-6 h-6 bg-white rounded-full flex items-center justify-center">
+                    <Zap className="w-3 h-3 text-[#FF4D2D]" fill="#FF4D2D" />
+                 </div>
+                 <span className="text-[13px] font-medium text-[#CCC]">Business-driven UX</span>
+              </div>
+              <div className="mt-12">
+                 <div className="text-[72px] font-medium tracking-tight mb-4">$300m</div>
+                 <p className="text-[#888] text-[15px] max-w-[200px] leading-relaxed">
+                   In funding clients raised owing<br/>to our design work
+                 </p>
+              </div>
+           </motion.div>
+           
+           <motion.div 
+             initial={{ opacity: 0, y: 20 }}
+             whileInView={{ opacity: 1, y: 0 }}
+             transition={{ duration: 0.6, delay: 0.2 }}
+             viewport={{ once: true }}
+             className="flex-[0.7] bg-[#0F0F0F] rounded-3xl p-10 border border-white/5 shadow-2xl flex flex-col justify-end"
+           >
+              <div className="text-[72px] font-medium tracking-tight mb-4">60+</div>
+              <p className="text-[#888] text-[15px] leading-relaxed">
+                World's biggest<br/>brands trust us
+              </p>
+           </motion.div>
+        </div>
       </section>
 
       {/* Isometric/Bento Showcase (Reference 2) */}
-      <section className="py-24 bg-[#0A0A0A] overflow-hidden" id="showcase">
-        <div className="max-w-7xl mx-auto px-8 relative">
-          <div className="text-center mb-20">
-            <h2 className="text-3xl md:text-5xl font-bold mb-6">Powerful Widget Control</h2>
-            <p className="text-lg text-[#888888] max-w-2xl mx-auto">Customize every aspect of your profile with drag-and-drop widgets. From GitHub stats to top languages, everything is a few clicks away.</p>
+      <section className="py-32 bg-[#E5E7EB] overflow-hidden relative" id="showcase">
+        <div className="max-w-7xl mx-auto px-8 relative flex flex-col lg:flex-row items-center justify-between gap-12 z-10">
+          
+          {/* Left Text */}
+          <div className="lg:w-1/3 mb-12 lg:mb-0">
+             <h2 className="text-4xl md:text-5xl font-medium text-black mb-6 tracking-tight">Key features<br/>for SaaS startups</h2>
+             <p className="text-lg text-gray-600">Our dashboards provide unmatched visibility and control over your core metrics. Built for speed and clarity.</p>
           </div>
 
-          <div className="relative w-full h-[700px] flex items-center justify-center">
+          {/* Right Isometric Bento Box */}
+          <div className="lg:w-2/3 relative h-[800px] flex items-center justify-center">
+            
             {/* The tilted perspective container */}
             <motion.div
-              initial={{ rotateX: 45, rotateZ: -20, y: 100, opacity: 0 }}
-              whileInView={{ rotateX: 10, rotateZ: 0, y: 0, opacity: 1 }}
-              transition={{ duration: 1, type: "spring" }}
+              initial={{ rotateX: 30, rotateY: -15, rotateZ: 10, opacity: 0, scale: 0.9 }}
+              whileInView={{ rotateX: 30, rotateY: -15, rotateZ: 10, opacity: 1, scale: 1 }}
+              transition={{ duration: 1 }}
               viewport={{ once: true }}
-              className="w-full max-w-4xl h-[600px] bg-[#D2D6DC] rounded-3xl p-8 shadow-2xl relative"
+              className="w-full max-w-[700px] flex flex-col gap-6 perspective-[2000px]"
+              style={{ transformStyle: 'preserve-3d' }}
             >
-               {/* Inner Dashboard */}
-               <div className="w-full h-full bg-white rounded-2xl p-8 flex flex-col gap-6 overflow-hidden shadow-inner border border-white/20">
-                  <div className="flex justify-between border-b border-gray-200 pb-4">
-                    <h3 className="text-xl font-bold text-gray-900">Visit statistics</h3>
-                    <div className="flex gap-2">
-                       <div className="w-3 h-3 rounded-full bg-gray-300"></div>
-                       <div className="w-3 h-3 rounded-full bg-gray-300"></div>
+               {/* Top Stats Bar */}
+               <div className="w-full bg-white rounded-[24px] p-6 shadow-xl flex gap-4 h-[200px]">
+                  {["#FF4D2D", "#FFB800", "#FFB800", "#E5E7EB", "#E5E7EB"].map((color, i) => (
+                    <div key={i} className="flex-1 flex flex-col justify-end relative h-full">
+                       <div className="w-full rounded-full absolute bottom-0" style={{ height: `${80 - i*10}%`, backgroundColor: color }} />
                     </div>
-                  </div>
-
-                  <div className="flex gap-6 h-[200px]">
-                     {/* Line Chart */}
-                     <div className="flex-1 border-b border-gray-100 flex items-end relative pb-4">
-                        <svg className="w-full h-full absolute inset-0" preserveAspectRatio="none">
-                          <polyline points="0,150 50,130 150,140 250,80 350,100 450,40" fill="none" stroke="#FFB800" strokeWidth="3" />
+                  ))}
+               </div>
+               
+               {/* Middle Section: Line Chart + Orange/White cards */}
+               <div className="flex gap-6 h-[260px]">
+                  {/* Left Line Chart */}
+                  <div className="flex-[2] bg-white rounded-[24px] p-6 shadow-xl relative overflow-hidden flex flex-col">
+                     <h3 className="text-gray-800 font-medium mb-4">Visit statistics</h3>
+                     <div className="flex-1 relative w-full mt-4">
+                        <svg className="absolute inset-0 w-full h-full overflow-visible" preserveAspectRatio="none">
+                           <polyline points="0,100 50,90 100,50 150,70 250,40 350,45 450,20" fill="none" stroke="#FFB800" strokeWidth="4" />
+                           <circle cx="0" cy="100" r="5" fill="#FFB800" />
+                           <circle cx="50" cy="90" r="5" fill="#FFB800" />
+                           <circle cx="100" cy="50" r="5" fill="#FFB800" />
+                           <circle cx="150" cy="70" r="5" fill="#FFB800" />
+                           <circle cx="250" cy="40" r="5" fill="#FFB800" />
+                           <circle cx="350" cy="45" r="5" fill="#FFB800" />
+                           <circle cx="450" cy="20" r="5" fill="#FFB800" />
                         </svg>
-                        <div className="w-full flex justify-between absolute bottom-[-20px] text-xs text-gray-400 font-medium">
-                          <span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span className="bg-gray-100 px-2 py-1 rounded text-black font-bold">Jun</span><span>Jul</span><span>Aug</span>
+                     </div>
+                     <div className="flex justify-between text-[11px] font-medium text-gray-400 mt-4">
+                        <span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span className="text-black bg-gray-100 px-2 py-1 rounded">Jun</span><span>Jul</span><span>Aug</span>
+                     </div>
+                  </div>
+                  
+                  {/* Right small cards */}
+                  <div className="flex-[1] flex flex-col gap-6">
+                     <div className="flex-1 bg-white rounded-[24px] p-6 shadow-xl flex flex-col justify-center">
+                        <div className="text-gray-500 font-medium mb-1">Visitors</div>
+                        <div className="w-full h-1 bg-gray-100 rounded-full mb-3"><div className="w-[60%] h-full bg-green-500 rounded-full"></div></div>
+                        <div className="flex items-end justify-between">
+                           <span className="text-[32px] font-medium text-black leading-none">56K</span>
+                           <span className="text-green-500 text-[12px] font-bold bg-green-50 px-2 py-1 rounded-full">↑ +14%</span>
+                        </div>
+                     </div>
+                     <div className="flex-1 bg-[#FF4D2D] rounded-[24px] p-6 shadow-xl flex flex-col justify-center">
+                        <div className="text-white/90 font-medium mb-2">Rate</div>
+                        <div className="text-[36px] font-medium text-white leading-none">+58%</div>
+                     </div>
+                  </div>
+               </div>
+               
+               {/* Bottom Section: Device Type */}
+               <div className="w-full bg-white rounded-[24px] p-6 shadow-xl relative overflow-hidden h-[240px]">
+                  <h3 className="text-gray-800 font-medium mb-6">Device type</h3>
+                  
+                  <div className="flex justify-between items-start">
+                     <div className="flex flex-col gap-4">
+                        <div>
+                           <div className="text-gray-400 text-sm">Windows</div>
+                           <div className="text-xl font-medium text-black">24,578</div>
+                        </div>
+                        <div>
+                           <div className="text-gray-400 text-sm">Mac Os</div>
+                           <div className="text-xl font-medium text-black">36,452</div>
                         </div>
                      </div>
                      
-                     {/* Stats Sidebar */}
-                     <div className="w-[180px] flex flex-col gap-4">
-                        <div className="flex-1 bg-white rounded-xl border border-gray-200 shadow-sm p-4 flex flex-col justify-center">
-                          <div className="text-gray-500 text-sm font-semibold mb-2">Visitors <span className="float-right text-green-500 bg-green-50 px-1 rounded text-xs">+14%</span></div>
-                          <div className="text-4xl font-bold text-gray-900">56K</div>
+                     <div className="flex items-end gap-3 h-[140px] absolute bottom-0 right-6 w-[60%]">
+                        <div className="flex-[1.5] bg-[#FFB800] rounded-t-[20px] p-4 flex flex-col justify-end text-black h-[50%]">
+                           <div className="text-xl font-medium">72%</div>
                         </div>
-                        <div className="flex-1 bg-[#FF4D2D] rounded-xl p-4 flex flex-col justify-center">
-                          <div className="text-white/80 text-sm font-semibold mb-1">Rate</div>
-                          <div className="text-4xl font-bold text-white">+58%</div>
+                        <div className="flex-[2] bg-[#FF4D2D] rounded-t-[20px] p-4 flex flex-col justify-end text-white h-[80%]">
+                           <div className="text-2xl font-medium">20%</div>
                         </div>
-                     </div>
-                  </div>
-
-                  {/* Device Type Section */}
-                  <div className="mt-8">
-                     <h4 className="text-gray-500 font-semibold mb-4">Device type</h4>
-                     <div className="flex gap-4">
-                        <div className="flex-[2] bg-[#FFB800] rounded-xl p-4 h-24 flex items-end">
-                           <div className="w-full flex justify-between items-end">
-                              <span className="text-black font-bold text-2xl">72%</span>
-                           </div>
-                        </div>
-                        <div className="flex-[1] bg-[#FF4D2D] rounded-xl p-4 h-24 flex items-end">
-                           <span className="text-white font-bold text-2xl">20%</span>
-                        </div>
-                        <div className="flex-[0.5] bg-[#7C3AED] rounded-xl p-4 h-24 flex items-end">
-                           <span className="text-white font-bold text-xl">8%</span>
+                        <div className="flex-[1.8] bg-[#8B5CF6] rounded-t-[20px] p-4 flex flex-col justify-end text-white h-[40%]">
+                           <div className="text-xl font-medium">8%</div>
                         </div>
                      </div>
                   </div>
@@ -224,70 +402,29 @@ export default function LandingPage() {
             </motion.div>
           </div>
         </div>
-      </section>
-
-      {/* Premium Templates Section */}
-      <section className="py-32 px-8 max-w-7xl mx-auto" id="templates">
-        <div className="flex justify-between items-end mb-16">
-          <div>
-            <h2 className="text-4xl font-bold mb-4">Premium Templates</h2>
-            <p className="text-[#888888] text-lg max-w-xl">Start with a stunning foundation. Our templates are designed by professionals and built for developers.</p>
-          </div>
-          <Button variant="outline" className="hidden md:flex rounded-full border-[#333] hover:bg-[#111] text-white bg-transparent h-12 px-6">
-            View all templates <ChevronRight className="ml-2 w-4 h-4" />
-          </Button>
+        
+        {/* Floating Book a call pill for the light section */}
+        <div className="absolute bottom-8 right-8 z-20">
+           <Link href="/editor">
+             <button className="bg-[#8B5CF6] hover:bg-[#7C3AED] text-white px-8 py-4 rounded-full font-medium flex items-center gap-3 transition-colors shadow-2xl text-[15px]">
+               Book a call <ArrowUpRight className="w-4 h-4" />
+             </button>
+           </Link>
         </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {[
-            { name: "Minimal Developer", color: "bg-[#1A1A1A]" },
-            { name: "Neon Cyberpunk", color: "bg-[#2D1B4E]" },
-            { name: "SaaS Professional", color: "bg-[#182944]" },
-            { name: "Creative Designer", color: "bg-[#451F1F]" },
-            { name: "Open Source Contributor", color: "bg-[#1D2B23]" },
-            { name: "Data Scientist", color: "bg-[#252525]" },
-          ].map((template, idx) => (
-            <div key={idx} className="group cursor-pointer">
-              <div className={`w-full aspect-[4/3] rounded-2xl ${template.color} mb-4 relative overflow-hidden border border-[#222] transition-transform duration-300 group-hover:scale-[1.02]`}>
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 bg-black/40 backdrop-blur-sm transition-opacity">
-                  <Button className="rounded-full bg-white text-black hover:bg-gray-200">Use Template</Button>
-                </div>
-              </div>
-              <h3 className="font-semibold text-lg">{template.name}</h3>
-              <p className="text-[#666] text-sm">Free to use</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-32 px-8 bg-[#FF4D2D] text-white text-center">
-        <h2 className="text-5xl md:text-7xl font-bold mb-8 tracking-tight max-w-4xl mx-auto">Ready to upgrade your GitHub profile?</h2>
-        <p className="text-xl text-white/80 max-w-2xl mx-auto mb-12 font-medium">Join thousands of developers building stunning profiles with ProfileForge. Free and open source forever.</p>
-        <Link href="/editor">
-          <Button size="lg" className="rounded-full px-12 h-16 text-xl bg-white text-[#FF4D2D] hover:bg-gray-100 font-bold">
-            Start Designing
-          </Button>
-        </Link>
       </section>
 
       {/* Footer */}
-      <footer className="py-12 px-8 max-w-7xl mx-auto border-t border-[#222]">
+      <footer className="py-12 px-8 max-w-[1400px] mx-auto border-t border-[#111]">
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="flex items-center gap-2">
-            <div className="w-6 h-6 bg-white rounded flex items-center justify-center">
-              <LayoutTemplate className="w-3 h-3 text-black" />
-            </div>
+            <Orbit className="w-6 h-6 text-white" />
             <span className="font-bold text-lg">ProfileForge</span>
           </div>
-          <div className="flex gap-8 text-sm text-[#888888] font-medium">
-            <Link href="#" className="hover:text-white">Privacy</Link>
-            <Link href="#" className="hover:text-white">Terms</Link>
-            <Link href="#" className="hover:text-white">Twitter</Link>
-            <Link href="https://github.com" className="hover:text-white">GitHub</Link>
-          </div>
-          <div className="text-sm text-[#666]">
-            &copy; {new Date().getFullYear()} ProfileForge. All rights reserved.
+          <div className="flex gap-8 text-[14px] text-[#888888] font-medium">
+            <Link href="#" className="hover:text-white transition-colors">Privacy Policy</Link>
+            <Link href="#" className="hover:text-white transition-colors">Terms of Service</Link>
+            <Link href="#" className="hover:text-white transition-colors">Dribbble</Link>
+            <Link href="#" className="hover:text-white transition-colors">Twitter</Link>
           </div>
         </div>
       </footer>
