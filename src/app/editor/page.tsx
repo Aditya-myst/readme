@@ -32,7 +32,7 @@ import {
 } from "lucide-react";
 import Editor from "@monaco-editor/react";
 import { marked } from "marked";
-import DOMPurify from "dompurify";
+import DOMPurify from "isomorphic-dompurify";
 import Link from "next/link";
 
 function GithubIcon({ className = "w-4 h-4" }: { className?: string }) {

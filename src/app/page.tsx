@@ -410,8 +410,8 @@ export default function Page() {
                             >
                                 <Link href="/editor">
                                     <motion.button
-                                        whileHover={{ scale: 1.03 }}
-                                        whileTap={{ scale: 0.97 }}
+                                        whileHover={{ scale: 1.05 }}
+                                        whileTap={{ scale: 0.95 }}
                                         className="inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-[13px] font-bold tracking-wide uppercase text-[#0d1117] cursor-pointer shadow-xl shadow-emerald-500/25"
                                         style={{ backgroundColor: GH.greenBtn }}
                                     >
@@ -420,8 +420,8 @@ export default function Page() {
                                 </Link>
                                 <Link href="/templates">
                                     <motion.button
-                                        whileHover={{ scale: 1.03 }}
-                                        whileTap={{ scale: 0.97 }}
+                                        whileHover={{ scale: 1.05 }}
+                                        whileTap={{ scale: 0.95 }}
                                         className="inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-[13px] font-bold tracking-wide uppercase cursor-pointer"
                                         style={{
                                             backgroundColor: GH.overlay,
@@ -442,13 +442,17 @@ export default function Page() {
                             transition={{ duration: 0.7, delay: 0.2, type: "spring" }}
                             className="relative flex justify-center lg:justify-end items-center"
                         >
-                            <div className="relative w-full max-w-[340px] sm:max-w-[440px] lg:max-w-[520px] xl:max-w-[560px]">
+                            <motion.div 
+                                animate={{ y: [0, -12, 0] }}
+                                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                                className="relative w-full max-w-[340px] sm:max-w-[440px] lg:max-w-[520px] xl:max-w-[560px]"
+                            >
                                 <div
                                     className="absolute inset-[12%] rounded-full blur-3xl opacity-25 pointer-events-none"
                                     style={{ background: `radial-gradient(circle, ${GH.blue} 0%, transparent 70%)` }}
                                 />
                                 <OctocatHero className="relative w-full h-auto drop-shadow-2xl scale-105 sm:scale-110" />
-                            </div>
+                            </motion.div>
                         </motion.div>
                     </div>
                 </div>
@@ -521,9 +525,10 @@ export default function Page() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: idx * 0.06 }}
-                                whileHover={{ y: -4 }}
+                                whileHover={{ y: -6, scale: 1.02 }}
+                                whileTap={{ scale: 0.98 }}
                                 onClick={() => router.push("/editor")}
-                                className="text-left p-6 rounded-2xl min-h-[260px] flex flex-col justify-between cursor-pointer group"
+                                className="text-left p-6 rounded-2xl min-h-[260px] flex flex-col justify-between cursor-pointer group transition-all"
                                 style={{
                                     backgroundColor: GH.surface,
                                     border: `1px solid ${idx === 2 ? `${GH.blue}55` : GH.border}`,
@@ -590,7 +595,8 @@ export default function Page() {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ delay: i * 0.04 }}
-                                    className="p-6 rounded-2xl space-y-4 hover:-translate-y-1 transition-transform"
+                                    whileHover={{ y: -6, scale: 1.02 }}
+                                    className="p-6 rounded-2xl space-y-4 transition-all"
                                     style={{ backgroundColor: GH.surface, border: `1px solid ${GH.border}` }}
                                 >
                                     <div
