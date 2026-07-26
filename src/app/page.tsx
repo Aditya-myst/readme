@@ -125,9 +125,9 @@ const TEMPLATES = [
         ],
     },
     {
-        title: "Tech Influencer",
-        desc: "High-density profile with octocat mascot, quick social links, blog posts & badges.",
-        badges: [{ label: "HIGH DENSITY", color: GH.orange }],
+        title: "Monospace Stack",
+        desc: "Ultra clean monospace tech stack and footer with ASCII art styling.",
+        badges: [{ label: "MINIMAL", color: GH.text }],
     },
 ];
 
