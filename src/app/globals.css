@@ -7,8 +7,8 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-sans), 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-mono), 'JetBrains Mono', monospace;
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
@@ -16,60 +16,38 @@
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
-  --radius-xl: 1rem;
 }
 
 :root {
   --background: #ffffff;
-  --foreground: #000000;
-  --card: #f8f9fa;
-  --card-foreground: #000000;
-  --primary: #FF4D2D; /* Outcrowd vibrant orange */
+  --foreground: #1f2328;
+  --card: #f6f8fa;
+  --card-foreground: #1f2328;
+  --primary: #2f81f7;
   --primary-foreground: #ffffff;
-  --secondary: #2C2C2C;
-  --secondary-foreground: #ffffff;
-  --muted: #f1f3f5;
-  --muted-foreground: #6b7280;
-  --border: #e5e7eb;
-  --input: #e5e7eb;
-  --ring: #FF4D2D;
+  --secondary: #161b22;
+  --secondary-foreground: #e6edf3;
+  --border: #d1d9e0;
+  --input: #d1d9e0;
+  --ring: #2f81f7;
 }
 
 .dark {
-  --background: #050505;
-  --foreground: #ffffff;
-  --card: #121212;
-  --card-foreground: #ffffff;
-  
-  /* Primary solid brand colors from Outcrowd reference */
-  --primary: #FF4D2D; /* Vibrant orange */
+  --background: #0d1117;
+  --foreground: #e6edf3;
+  --card: #161b22;
+  --card-foreground: #e6edf3;
+  --primary: #58a6ff;
   --primary-foreground: #ffffff;
-  
-  --secondary: #1F1F1F;
-  --secondary-foreground: #ffffff;
-  
-  --muted: #1F1F1F;
-  --muted-foreground: #888888;
-  
-  --accent: #262626;
-  --accent-foreground: #ffffff;
-  
-  --destructive: #EF4444;
-  --destructive-foreground: #ffffff;
-  
-  --border: #222222;
-  --input: #222222;
-  --ring: #FF4D2D;
+  --secondary: #21262d;
+  --secondary-foreground: #e6edf3;
+  --muted: #21262d;
+  --muted-foreground: #8b949e;
+  --border: #30363d;
+  --input: #30363d;
+  --ring: #58a6ff;
 }
 
 @layer base {
@@ -78,22 +56,71 @@
   }
   html {
     scroll-behavior: smooth;
+    font-family: var(--font-sans);
   }
   body {
     @apply bg-background text-foreground font-sans antialiased;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.02em;
   }
-  
   h1, h2, h3, h4, h5, h6 {
     letter-spacing: -0.03em;
+    font-family: var(--font-sans);
+  }
+  
+  /* Force all form controls to use clean sans-serif */
+  input, select, textarea, button {
+    font-family: var(--font-sans) !important;
   }
 }
 
 @layer utilities {
-  .solid-card {
-    @apply bg-card border border-border rounded-xl;
+  .tracking-agency {
+    letter-spacing: 0.15em;
   }
-  .solid-card-inner {
-    @apply bg-secondary border border-border rounded-lg;
+  
+  /* Marquee Ticker Animations */
+  .animate-marquee-left {
+    display: flex;
+    width: max-content;
+    animation: marqueeLeft 40s linear infinite;
   }
+  .animate-marquee-right {
+    display: flex;
+    width: max-content;
+    animation: marqueeRight 60s linear infinite;
+  }
+  .animate-marquee-slow {
+    display: flex;
+    width: max-content;
+    animation: marqueeLeft 55s linear infinite;
+  }
+
+  .animate-marquee-left:hover,
+  .animate-marquee-right:hover,
+  .animate-marquee-slow:hover {
+    animation-play-state: paused !important;
+  }
+
+  /* Floating animations */
+  .animate-float-slow {
+    animation: floatVertical 6s ease-in-out infinite;
+  }
+  .animate-float-delayed {
+    animation: floatVertical 7s ease-in-out infinite 2s;
+  }
+}
+
+@keyframes marqueeLeft {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-25%); }
+}
+
+@keyframes marqueeRight {
+  0% { transform: translateX(-25%); }
+  100% { transform: translateX(0%); }
+}
+
+@keyframes floatVertical {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
 }

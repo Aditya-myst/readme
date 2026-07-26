@@ -1,66 +1,169 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { LayoutTemplate, ArrowLeft, ArrowUpRight } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useProfileStore, TemplateType } from "@/store/profileStore";
+import { templates } from "@/lib/templates";
+import { ArrowLeft, ArrowRight, Sparkles, Check, ChevronDown } from "lucide-react";
+
+/* ── GitHub Dark Palette ── */
+const GH = {
+  canvas:    "#0d1117",
+  surface:   "#161b22",
+  overlay:   "#21262d",
+  border:    "#30363d",
+  text:      "#e6edf3",
+  muted:     "#8b949e",
+  subtle:    "#6e7681",
+  blue:      "#58a6ff",
+  green:     "#3fb950",
+  red:       "#f85149",
+  orange:    "#d29922",
+  purple:    "#bc8cff",
+};
 
 export default function TemplatesPage() {
-  return (
-    <div className="min-h-screen bg-[#0A0A0A] text-white selection:bg-[#FF4D2D] selection:text-white font-sans antialiased overflow-hidden pt-32 pb-20 px-8">
-      {/* Soft Top Glow */}
-      <motion.div 
-        animate={{ opacity: [0.3, 0.6, 0.3], scale: [1, 1.05, 1] }}
-        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-[#FF4D2D]/10 blur-[120px] rounded-full pointer-events-none" 
-      />
+  const router = useRouter();
+  const { template: currentTemplate, setTemplate } = useProfileStore();
+  const [selectedCategory, setSelectedCategory] = useState<string>("All");
 
-      <div className="max-w-7xl mx-auto relative z-10">
-        <Link href="/" className="inline-flex items-center gap-2 text-[#888] hover:text-white transition-colors mb-12 font-medium">
-          <ArrowLeft className="w-4 h-4" /> Back to Home
+  const categories = ["All", "Popular", "Developer", "Open Source", "Specialized", "Creative", "Minimal", "Nostalgic"];
+
+  const handleSelectTemplate = (key: TemplateType) => {
+    setTemplate(key);
+    router.push("/editor");
+  };
+
+  const filteredTemplates = Object.entries(templates).filter(([key, tpl]) => {
+    if (selectedCategory === "All") return true;
+    return tpl.category.toLowerCase() === selectedCategory.toLowerCase();
+  });
+
+  return (
+    <div className="min-h-screen text-[#e6edf3] font-sans antialiased selection:bg-[#58a6ff]/30 selection:text-white" style={{ backgroundColor: GH.canvas }}>
+      
+      {/* ── TOP NAVIGATION BAR ── */}
+      <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md px-6 sm:px-12 py-5 flex items-center justify-between" style={{ backgroundColor: `${GH.canvas}e6`, borderBottom: `1px solid ${GH.border}` }}>
+        <Link href="/" className="flex items-center gap-2 font-bold tracking-tighter text-xl group">
+          <span className="text-[#58a6ff] text-2xl group-hover:rotate-180 transition-transform duration-500">✴</span>
+          <span className="text-[#e6edf3] font-extrabold text-xl lowercase tracking-tight">profileforge</span>
         </Link>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <h1 className="text-5xl md:text-7xl font-medium mb-6 tracking-tight">Curated Templates</h1>
-          <p className="text-[#888888] text-xl max-w-2xl mb-16 leading-relaxed">
-            Start with a stunning foundation. Our templates are reverse-engineered from top developers and completely free to use. Just select one and customize it in the editor.
-          </p>
-        </motion.div>
+        <div className="hidden lg:flex items-center gap-8 text-[11px] font-bold tracking-[0.15em] uppercase" style={{ color: GH.muted }}>
+          <Link href="/" className="hover:text-white transition-colors flex items-center gap-1">
+            <ArrowLeft className="w-3.5 h-3.5" /> HOME
+          </Link>
+          <Link href="/templates" className="text-white transition-colors">
+            TEMPLATES
+          </Link>
+          <Link href="/#opensource" className="hover:text-white transition-colors">
+            OPEN SOURCE
+          </Link>
+          <Link href="/#socials" className="hover:text-white transition-colors">
+            COMMUNITY
+          </Link>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {[
-            { name: "Minimalist", desc: "Clean text, bullet points, basic links.", color: "bg-[#1A1A1A]" },
-            { name: "Developer Pro", desc: "GitHub stats cards and neat badges.", color: "bg-[#2D1B4E]" },
-            { name: "Influencer", desc: "sw-yx style: High density, endorsements.", color: "bg-[#182944]" },
-            { name: "Power User", desc: "DenverCoder1 style: Typing header, toggles.", color: "bg-[#451F1F]" },
-            { name: "90s Retro", desc: "Fun, nostalgic GIFs and guestbooks.", color: "bg-[#1D2B23]" },
-          ].map((template, idx) => (
-            <motion.div 
-              key={idx} 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
-              className="group cursor-pointer"
+        <Link href="/editor">
+          <button className="px-6 py-2.5 rounded-lg text-white font-bold tracking-wider text-xs uppercase transition-all flex items-center gap-2 cursor-pointer shadow-lg" style={{ backgroundColor: GH.green }}>
+            <span>LAUNCH EDITOR</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </button>
+        </Link>
+      </header>
+
+      {/* ── MAIN CONTENT CONTAINER ── */}
+      <main className="pt-36 pb-24 px-6 sm:px-12 max-w-7xl mx-auto">
+        
+        {/* Header */}
+        <div className="max-w-3xl mb-12 space-y-4">
+          <div className="text-xs font-bold tracking-[0.15em] uppercase" style={{ color: GH.blue }}>
+            14+ HANDCRAFTED GITHUB README TEMPLATES
+          </div>
+          
+          <h1 className="text-4xl sm:text-6xl font-bold tracking-tight leading-tight" style={{ color: GH.text }}>
+            Explore README Templates. Click & Edit Instantly.
+          </h1>
+          
+          <p className="text-base leading-relaxed" style={{ color: GH.muted }}>
+            Select from 14+ templates built for Developers, Open Source Maintainers, AI Researchers, DevOps Specialists, and Designers.
+          </p>
+        </div>
+
+        {/* Category Filter Pills */}
+        <div className="flex flex-wrap items-center gap-2 mb-12">
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setSelectedCategory(cat)}
+              className="px-4 py-2 rounded-lg text-xs font-bold tracking-wider uppercase transition-all cursor-pointer border"
+              style={
+                selectedCategory === cat
+                  ? { backgroundColor: GH.blue, color: "#ffffff", borderColor: GH.blue }
+                  : { backgroundColor: GH.surface, color: GH.muted, borderColor: GH.border }
+              }
             >
-              <div className={`w-full aspect-[4/3] rounded-2xl ${template.color} mb-5 relative overflow-hidden border border-white/5 transition-transform duration-300 group-hover:scale-[1.02] flex items-center justify-center shadow-xl`}>
-                <div className="text-white/20 font-bold text-3xl">{template.name}</div>
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 bg-black/60 backdrop-blur-sm transition-opacity">
-                  <Link href="/editor">
-                    <button className="rounded-full bg-white text-black px-8 py-3 font-medium hover:bg-gray-200 transition-colors cursor-pointer shadow-2xl flex items-center gap-2">
-                      Use Template <ArrowUpRight className="w-4 h-4" />
-                    </button>
-                  </Link>
-                </div>
-              </div>
-              <h3 className="font-semibold text-xl text-white">{template.name}</h3>
-              <p className="text-[#888] text-sm mt-2">{template.desc}</p>
-            </motion.div>
+              {cat}
+            </button>
           ))}
         </div>
-      </div>
+
+        {/* Template Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {filteredTemplates.map(([key, tpl], idx) => {
+            const isSelected = currentTemplate === key;
+
+            return (
+              <motion.div
+                key={key}
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: idx * 0.03 }}
+                onClick={() => handleSelectTemplate(key as TemplateType)}
+                className="group rounded-2xl transition-all duration-300 cursor-pointer overflow-hidden flex flex-col justify-between hover:scale-[1.02]"
+                style={{
+                  backgroundColor: GH.surface,
+                  border: `1px solid ${isSelected ? GH.blue : GH.border}`
+                }}
+              >
+                <div className="p-8 space-y-4">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded" style={{ backgroundColor: `${GH.blue}15`, color: GH.blue, border: `1px solid ${GH.blue}30` }}>
+                      {tpl.category}
+                    </span>
+                    {isSelected && (
+                      <span className="flex items-center gap-1 text-[10px] font-bold text-white px-2.5 py-1 rounded" style={{ backgroundColor: GH.green }}>
+                        <Check className="w-3 h-3" /> ACTIVE
+                      </span>
+                    )}
+                  </div>
+
+                  <div>
+                    <h3 className="text-xl font-bold mb-2 group-hover:text-[#58a6ff] transition-colors" style={{ color: GH.text }}>
+                      {tpl.title}
+                    </h3>
+                    <p className="text-xs leading-relaxed line-clamp-3" style={{ color: GH.muted }}>
+                      {tpl.description}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="px-8 py-5 flex items-center justify-between transition-colors" style={{ backgroundColor: GH.overlay, borderTop: `1px solid ${GH.border}` }}>
+                  <span className="text-xs font-bold tracking-wider uppercase transition-colors" style={{ color: GH.muted }}>
+                    LOAD IN EDITOR ↗
+                  </span>
+                  <div className="p-2 rounded-lg text-white transition-colors" style={{ backgroundColor: `${GH.blue}20`, color: GH.blue }}>
+                    <ArrowRight className="w-4 h-4" />
+                  </div>
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
+
+      </main>
     </div>
   );
 }
