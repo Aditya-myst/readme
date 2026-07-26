@@ -15,7 +15,8 @@ export type TemplateType =
   | 'polyglot'
   | 'gamer'
   | 'designer'
-  | 'student';
+  | 'student'
+  | 'terminal';
 
 export type BadgeStyleType = 'for-the-badge' | 'flat' | 'flat-square' | 'plastic' | 'social';
 
