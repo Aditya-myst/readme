@@ -535,29 +535,35 @@ ${data.showStats ? `
   polyglot: {
     title: "Polyglot Badges Showcase",
     category: "Minimal",
-    description: "Maximum tech badge focus for multi-language developers.",
+    description: "Categorized layout of tech stack badges (Dev Tools, DevOps, Databases, Hardware).",
     render: (data) => `
-<div align="center">
-  <h1>Hi 👋, I'm ${data.name}</h1>
-  <p>${data.tagline}</p>
-  <p>${renderSocialBadges(data)}</p>
-</div>
+### Dev Tools
+
+${renderSkillsBadges(data.selectedSkills, '', data.badgeStyle)}
 
 ---
 
-### 🌐 Technologies & Languages Spectrum
-${renderSkillsBadges(data.selectedSkills, data.customSkills, data.badgeStyle)}
+### DevOps & Infra
+
+${renderSkillsBadges([], 'pm2, docker, nginx, grafana, windows, linux, vmware', data.badgeStyle)}
 
 ---
 
-### 📖 About
-${data.about}
+### Remote & Network
 
-- 📌 **Building:** [${data.workingOnName}](${data.workingOnUrl || '#'})
-- 🌱 **Learning:** ${data.learning}
-- 💬 **Ask me:** ${data.askMeAbout}
+${renderSkillsBadges([], 'termius, putty, rdp, filezilla', data.badgeStyle)}
 
-${data.showVisitorCount ? `![Views](https://profile-counter.glitch.me/${data.github || 'polyglot'}/count.svg)` : ''}
+---
+
+### Databases
+
+${renderSkillsBadges([], 'sqlite, mysql, mongodb, phpmyadmin, supabase', data.badgeStyle)}
+
+---
+
+### Hardware
+
+${renderSkillsBadges([], 'raspberrypi, flipper zero, kvm, ledger, thinkpad', data.badgeStyle)}
 `.trim()
   },
 
