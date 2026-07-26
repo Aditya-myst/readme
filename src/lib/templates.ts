@@ -784,11 +784,22 @@ ${skillsHtml}
   minimalist_mono: {
     title: "Monospace Stack",
     category: "Minimal",
-    description: "Ultra clean monospace tech stack and footer with ASCII art styling.",
+    description: "Ultra clean monospace tech stack, contribution graph, and footer with ASCII art styling.",
     render: (data) => `
 <h1><code>${data.name.toLowerCase()}</code></h1>
 <p><code>${data.tagline.toLowerCase()}</code></p>
 
+<br/>
+
+<h2><code>05  A C T I V I T Y</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <code>~/05-activity</code></h2>
+<hr/>
+<br/>
+
+<div align="center">
+  <img src="https://github-readme-activity-graph.vercel.app/graph?username=${data.github || 'torvalds'}&theme=react-dark&hide_border=true&bg_color=0d1117&color=58a6ff&line=58a6ff&point=e6edf3" width="100%" alt="Contribution Graph" />
+</div>
+
+<br/>
 <br/>
 
 <h2><code>06  S T A C K</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <code>~/06-stack</code></h2>
