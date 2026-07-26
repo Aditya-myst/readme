@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 import { useProfileStore, ProfileState, TemplateType, BadgeStyleType } from "@/store/profileStore";
 import { templates } from "@/lib/templates/index";
 import { SKILL_BADGES, SKILL_CATEGORIES } from "@/lib/skills";
@@ -794,14 +795,14 @@ export default function EditorPage() {
           </div>
         </div>
 
-        {/* ── RIGHT WORKSPACE ── */}
+                {/* ── RIGHT WORKSPACE ── */}
         <div className="flex-1 flex overflow-hidden" style={{ backgroundColor: GH.canvas }}>
-
+          <PanelGroup direction="horizontal">
+          
           {/* PREVIEW PANEL */}
-          {(viewMode === "split" || viewMode === "preview") && (
+          <Panel defaultSize={60} minSize={30}>
             <div
               className="flex-1 flex flex-col h-full overflow-hidden"
-              style={{ borderRight: viewMode === "split" ? `1px solid ${GH.border}` : "none" }}
             >
               {/* Preview Header */}
               <div className="h-10 px-5 flex items-center justify-between text-xs font-bold uppercase tracking-[0.15em] shrink-0" style={{ background: GH.surface, borderBottom: `1px solid ${GH.border}`, color: GH.muted }}>
@@ -829,12 +830,14 @@ export default function EditorPage() {
                 />
               </div>
             </div>
-          )}
+          </Panel>
+
+          <PanelResizeHandle className="w-[2px] bg-[#30363d] hover:bg-[#58a6ff] hover:w-[4px] transition-all cursor-col-resize z-50" />
 
           {/* MONACO EDITOR PANEL */}
-          {(viewMode === "split" || viewMode === "code") && (
+          <Panel defaultSize={40} minSize={20}>
             <div
-              className={`${viewMode === 'split' ? 'w-[380px] lg:w-[460px] xl:w-[520px] shrink-0' : 'flex-1'} flex flex-col h-full`}
+              className="flex flex-col h-full w-full"
               style={{ backgroundColor: GH.canvas }}
             >
               {/* Code Header */}
@@ -855,7 +858,7 @@ export default function EditorPage() {
               </div>
 
               {/* Monaco */}
-              <div className="flex-1 relative">
+              <div className="flex-1 relative w-full">
                 <Editor
                   height="100%"
                   defaultLanguage="markdown"
@@ -874,8 +877,9 @@ export default function EditorPage() {
                 />
               </div>
             </div>
-          )}
+          </Panel>
 
+          </PanelGroup>
         </div>
 
       </div>
