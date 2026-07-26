@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Panel, Group, Separator } from "react-resizable-panels";
+import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 import { useProfileStore, ProfileState, TemplateType, BadgeStyleType } from "@/store/profileStore";
 import { templates } from "@/lib/templates/index";
 import { SKILL_BADGES, SKILL_CATEGORIES } from "@/lib/skills";
@@ -797,7 +797,7 @@ export default function EditorPage() {
 
                 {/* ── RIGHT WORKSPACE ── */}
         <div className="flex-1 flex overflow-hidden" style={{ backgroundColor: GH.canvas }}>
-          <Group orientation="horizontal" >
+          <PanelGroup direction="horizontal" >
           
           {/* PREVIEW PANEL */}
           <Panel defaultSize={60} minSize={30}>
@@ -832,7 +832,7 @@ export default function EditorPage() {
             </div>
           </Panel>
 
-          <Separator className="w-[2px] bg-[#30363d] hover:bg-[#58a6ff] hover:w-[4px] transition-all cursor-col-resize z-50" />
+          <PanelResizeHandle className="w-[2px] bg-[#30363d] hover:bg-[#58a6ff] hover:w-[4px] transition-all cursor-col-resize z-50" />
 
           {/* MONACO EDITOR PANEL */}
           <Panel defaultSize={40} minSize={20}>
@@ -879,7 +879,7 @@ export default function EditorPage() {
             </div>
           </Panel>
 
-          </Group>
+          </PanelGroup>
         </div>
 
       </div>
