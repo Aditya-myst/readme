@@ -129,6 +129,11 @@ const TEMPLATES = [
         desc: "Ultra clean monospace tech stack and footer with ASCII art styling.",
         badges: [{ label: "MINIMAL", color: GH.text }],
     },
+    {
+        title: "AI & ML Architect",
+        desc: "High-tech animated layout with waving headers, typing SVG, and complex stats graphs.",
+        badges: [{ label: "ANIMATED", color: GH.orange }],
+    },
 ];
 
 const FEATURES = [

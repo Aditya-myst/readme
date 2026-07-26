@@ -17,7 +17,8 @@ export type TemplateType =
   | 'designer'
   | 'student'
   | 'terminal'
-  | 'minimalist_mono';
+  | 'minimalist_mono'
+  | 'ai_engineer';
 
 export type BadgeStyleType = 'for-the-badge' | 'flat' | 'flat-square' | 'plastic' | 'social';
 
