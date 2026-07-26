@@ -129,6 +129,11 @@ const TEMPLATES = [
         desc: "High-density profile with octocat mascot, quick social links, blog posts & badges.",
         badges: [{ label: "HIGH DENSITY", color: GH.orange }],
     },
+    {
+        title: "Terminal Minimalist",
+        desc: "Monospace aesthetic inspired by minimalist IDEs. Lowercase text, clean grids, and code blocks.",
+        badges: [{ label: "MINIMAL", color: GH.text }],
+    },
 ];
 
 const FEATURES = [
