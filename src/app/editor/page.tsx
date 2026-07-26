@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useProfileStore, ProfileState, TemplateType, BadgeStyleType } from "@/store/profileStore";
-import { templates } from "@/lib/templates";
+import { templates } from "@/lib/templates/index";
 import { SKILL_BADGES, SKILL_CATEGORIES } from "@/lib/skills";
 import { 
   User, 

@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useProfileStore, TemplateType } from "@/store/profileStore";
-import { templates } from "@/lib/templates";
+import { templates } from "@/lib/templates/index";
 import { ArrowLeft, ArrowRight, Sparkles, Check, ChevronDown } from "lucide-react";
 
 /* ── GitHub Dark Palette ── */
