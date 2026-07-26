@@ -129,6 +129,12 @@ export default function TemplatesPage() {
                 }}
               >
                 <div className="p-8 space-y-4">
+                  {key === 'terminal' && (
+                     <div className="w-full aspect-[4/3] rounded-lg overflow-hidden border border-[#30363d] mb-6 relative">
+                       <img src="/templates/terminal.png" alt="Terminal Minimalist Preview" className="w-full h-full object-cover object-top opacity-80 group-hover:opacity-100 transition-opacity" />
+                     </div>
+                  )}
+
                   <div className="flex items-center justify-between">
                     <span className="text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded" style={{ backgroundColor: `${GH.blue}15`, color: GH.blue, border: `1px solid ${GH.blue}30` }}>
                       {tpl.category}

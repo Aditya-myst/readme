@@ -144,10 +144,6 @@ export default function EditorPage() {
             {sidebarOpen ? <PanelLeftClose className="w-5 h-5" /> : <PanelLeftOpen className="w-5 h-5" />}
           </button>
 
-          {/* Logo Icon Only (No text) */}
-          <Link href="/" title="Go to Home" className="flex items-center text-xl font-extrabold group">
-            <span className="text-[#58a6ff] text-2xl group-hover:rotate-180 transition-transform duration-500">✴</span>
-          </Link>
         </div>
 
         {/* GitHub Auto-Import */}
