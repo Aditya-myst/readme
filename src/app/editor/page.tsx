@@ -134,16 +134,10 @@ export default function EditorPage() {
         style={{ background: GH.surface, borderBottom: `1px solid ${GH.border}` }}
       >
         <div className="flex items-center gap-3">
-          {/* Sidebar Toggle */}
-          <button
-            onClick={() => setSidebarOpen(!sidebarOpen)}
-            title={sidebarOpen ? "Collapse Panel" : "Expand Panel"}
-            className="p-1.5 rounded-lg transition-colors cursor-pointer"
-            style={{ color: sidebarOpen ? GH.blue : GH.muted }}
-          >
-            {sidebarOpen ? <PanelLeftClose className="w-5 h-5" /> : <PanelLeftOpen className="w-5 h-5" />}
-          </button>
-
+          {/* Logo Icon Only (No text) */}
+          <Link href="/" title="Go to Home" className="flex items-center">
+            <LayoutTemplate className="w-5 h-5" style={{ color: GH.blue }} />
+          </Link>
         </div>
 
         {/* GitHub Auto-Import */}
@@ -219,7 +213,6 @@ export default function EditorPage() {
       >
         {/* Template Selector */}
         <div className="flex items-center gap-2">
-          <LayoutTemplate className="w-4 h-4" style={{ color: GH.blue }} />
           <span className="text-xs font-bold tracking-[0.15em] uppercase hidden sm:inline" style={{ color: GH.muted }}>TEMPLATE:</span>
           <select
             value={profileState.template}
