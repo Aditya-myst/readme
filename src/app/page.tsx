@@ -132,7 +132,7 @@ export default function LandingPage() {
             
             <motion.div 
               whileHover={{ y: -5 }}
-              className="relative w-[220px] bg-[#1A1A1A] rounded-2xl p-5 shadow-2xl border border-white/10 backdrop-blur-md pointer-events-auto"
+              className="relative w-[220px] bg-[#1A1A1A] rounded-2xl p-5 shadow-2xl border border-white/10 backdrop-blur-md pointer-events-auto cursor-default"
             >
               <div className="flex justify-between items-start mb-4">
                 <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm">
@@ -141,12 +141,12 @@ export default function LandingPage() {
                 <div className="text-xs font-semibold bg-[#2A2A2A] text-white px-2.5 py-1 rounded-md">Raw Markdown</div>
               </div>
               <div className="font-mono text-[10px] text-left leading-relaxed text-[#888]">
-                <span className="text-[#FFB800]">#</span> <span className="text-white">Hi, I'm a Developer</span><br/>
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }}><span className="text-[#FFB800]">#</span> <span className="text-white">Hi, I'm a Developer</span></motion.div>
                 <br/>
-                <span className="text-[#8B5CF6]">[![Stats]</span><span className="text-white">(https://...</span><br/>
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.5 }}><span className="text-[#8B5CF6]">[![Stats]</span><span className="text-white">(https://...</span></motion.div>
                 <br/>
-                <span className="text-[#10B981]">-</span> 🔭 I’m working on...<br/>
-                <span className="text-[#10B981]">-</span> 🌱 I’m learning...
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2.0 }}><span className="text-[#10B981]">-</span> 🔭 I’m working on...</motion.div>
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2.5 }}><span className="text-[#10B981]">-</span> 🌱 I’m learning...</motion.div>
               </div>
             </motion.div>
           </motion.div>
@@ -171,24 +171,37 @@ export default function LandingPage() {
                     <div className="w-px h-full bg-white/5" />
                  </div>
                  <svg className="absolute inset-0 w-full h-full" preserveAspectRatio="none">
-                    <polyline points="0,70 30,65 60,30 100,30" fill="none" stroke="#2ea44f" strokeWidth="2" />
-                    <circle cx="0" cy="70" r="3" fill="#2ea44f" />
-                    <circle cx="30" cy="65" r="3" fill="#2ea44f" />
-                    <circle cx="60" cy="30" r="3" fill="#2ea44f" />
-                    <circle cx="100" cy="30" r="3" fill="#2ea44f" />
+                    <motion.polyline 
+                      points="0,70 30,65 60,30 100,30" 
+                      fill="none" 
+                      stroke="#2ea44f" 
+                      strokeWidth="2" 
+                      initial={{ pathLength: 0 }}
+                      animate={{ pathLength: 1 }}
+                      transition={{ duration: 1.5, delay: 1, ease: "easeInOut" }}
+                    />
+                    <motion.circle cx="0" cy="70" r="3" fill="#2ea44f" initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 1.1 }} />
+                    <motion.circle cx="30" cy="65" r="3" fill="#2ea44f" initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 1.4 }} />
+                    <motion.circle cx="60" cy="30" r="3" fill="#2ea44f" initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 1.7 }} />
+                    <motion.circle cx="100" cy="30" r="3" fill="#2ea44f" initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 2.0 }} />
                  </svg>
               </div>
               <div className="flex justify-between text-[9px] text-[#555] font-medium uppercase tracking-wider mb-2">
                 <span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span>
               </div>
               
-              <div className="absolute -right-8 -bottom-6 bg-[#2ea44f] rounded-xl p-3 shadow-xl">
+              <motion.div 
+                initial={{ scale: 0, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 0.5, delay: 2 }}
+                className="absolute -right-8 -bottom-6 bg-[#2ea44f] rounded-xl p-3 shadow-xl"
+              >
                  <div className="flex justify-between items-center gap-6 mb-1 text-white/80 text-[11px] font-medium">
                    <span>Streak</span>
                    <Wand2 className="w-3 h-3" />
                  </div>
                  <div className="text-xl font-bold text-white">42 days</div>
-              </div>
+              </motion.div>
             </motion.div>
           </motion.div>
 
@@ -205,23 +218,33 @@ export default function LandingPage() {
               <div className="text-[13px] font-medium text-white mb-6">Top Languages API</div>
               <div className="flex items-end justify-between gap-1.5 h-28 relative">
                 {[
-                  { height: "50%" },
-                  { height: "40%" },
-                  { height: "70%" },
-                  { height: "60%" },
-                  { height: "100%", isHighlight: true, top: "TS", bottom: "JS" },
-                  { height: "45%" },
-                  { height: "80%" }
+                  { height: "50%", delay: 0.8 },
+                  { height: "40%", delay: 0.9 },
+                  { height: "70%", delay: 1.0 },
+                  { height: "60%", delay: 1.1 },
+                  { height: "100%", isHighlight: true, delay: 1.2, top: "56%", bottom: "28%" },
+                  { height: "45%", delay: 1.3 },
+                  { height: "80%", delay: 1.4 }
                 ].map((bar, i) => (
                   <div key={i} className="w-full relative h-full flex flex-col justify-end group">
                     <div className="absolute inset-0 rounded-md border border-white/10 border-dashed opacity-30" />
                     {bar.isHighlight ? (
-                      <div className="w-full bg-[#8B5CF6] rounded-md flex flex-col justify-between items-center py-1 z-10" style={{ height: bar.height }}>
-                        <div className="bg-white text-black text-[9px] font-bold px-1.5 py-0.5 rounded-sm absolute -top-6">56%</div>
-                        <div className="bg-white text-black text-[9px] font-bold px-1.5 py-0.5 rounded-sm mt-1">28%</div>
-                      </div>
+                      <motion.div 
+                        initial={{ height: 0 }}
+                        animate={{ height: bar.height }}
+                        transition={{ duration: 0.8, delay: bar.delay, type: "spring" }}
+                        className="w-full bg-[#8B5CF6] rounded-md flex flex-col justify-between items-center py-1 z-10 relative"
+                      >
+                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: bar.delay + 0.5 }} className="bg-white text-black text-[9px] font-bold px-1.5 py-0.5 rounded-sm absolute -top-6">56%</motion.div>
+                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: bar.delay + 0.5 }} className="bg-white text-black text-[9px] font-bold px-1.5 py-0.5 rounded-sm mt-1">28%</motion.div>
+                      </motion.div>
                     ) : (
-                      <div className={`w-full bg-[#2A2A2A] rounded-md z-10`} style={{ height: bar.height }} />
+                      <motion.div 
+                        initial={{ height: 0 }}
+                        animate={{ height: bar.height }}
+                        transition={{ duration: 0.8, delay: bar.delay, type: "spring" }}
+                        className="w-full bg-[#2A2A2A] rounded-md z-10" 
+                      />
                     )}
                   </div>
                 ))}
@@ -235,7 +258,7 @@ export default function LandingPage() {
           {/* Bottom Right: Blue Circle */}
           <div className="absolute top-[52%] right-[-2%] xl:right-[2%] 2xl:right-[6%] hidden xl:flex flex-col items-end gap-6 pointer-events-auto scale-[0.8] xl:scale-100 origin-right">
             <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
+              initial={{ opacity: 0, scale: 0 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.6, type: "spring" }}
               className="w-[180px] h-[180px] bg-[#0066FF] rounded-full flex items-center justify-center text-center p-6 shadow-2xl"
