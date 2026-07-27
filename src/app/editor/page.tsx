@@ -800,9 +800,10 @@ export default function EditorPage() {
           <PanelGroup direction="horizontal" >
           
           {/* PREVIEW PANEL */}
-          <Panel defaultSize={60} minSize={30}>
+          {(viewMode === "split" || viewMode === "preview") && (
+            <Panel defaultSize={viewMode === "split" ? 60 : 100} minSize={30}>
             <div
-              className="flex-1 flex flex-col h-full overflow-hidden"
+              className="w-full h-full flex flex-col overflow-hidden"
             >
               {/* Preview Header */}
               <div className="h-10 px-5 flex items-center justify-between text-xs font-bold uppercase tracking-[0.15em] shrink-0" style={{ background: GH.surface, borderBottom: `1px solid ${GH.border}`, color: GH.muted }}>
@@ -830,14 +831,16 @@ export default function EditorPage() {
                 />
               </div>
             </div>
-          </Panel>
+            </Panel>
+          )}
 
-          <PanelResizeHandle className="w-[2px] bg-[#30363d] hover:bg-[#58a6ff] hover:w-[4px] transition-all cursor-col-resize z-50" />
+          {viewMode === "split" && <PanelResizeHandle className="w-[1px] bg-[#30363d] hover:bg-[#58a6ff] hover:w-[4px] transition-all cursor-col-resize z-50 mx-0.5" />}
 
           {/* MONACO EDITOR PANEL */}
-          <Panel defaultSize={40} minSize={20}>
+          {(viewMode === "split" || viewMode === "code") && (
+            <Panel defaultSize={viewMode === "split" ? 40 : 100} minSize={20}>
             <div
-              className="flex flex-col h-full w-full"
+              className="w-full h-full flex flex-col overflow-hidden"
               style={{ backgroundColor: GH.canvas }}
             >
               {/* Code Header */}
@@ -877,8 +880,8 @@ export default function EditorPage() {
                 />
               </div>
             </div>
-          </Panel>
-
+            </Panel>
+          )}
           </PanelGroup>
         </div>
 
