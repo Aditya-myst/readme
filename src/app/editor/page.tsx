@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
+import { Panel, Group as PanelGroup, Separator as PanelResizeHandle } from "react-resizable-panels";
 import { useProfileStore, ProfileState, TemplateType, BadgeStyleType } from "@/store/profileStore";
 import { templates } from "@/lib/templates/index";
 import { SKILL_BADGES, SKILL_CATEGORIES } from "@/lib/skills";
@@ -797,7 +797,7 @@ export default function EditorPage() {
 
                 {/* ── RIGHT WORKSPACE ── */}
         <div className="flex-1 flex overflow-hidden" style={{ backgroundColor: GH.canvas }}>
-          <PanelGroup direction="horizontal" >
+          <PanelGroup orientation="horizontal" >
           
           {/* PREVIEW PANEL */}
           <Panel defaultSize={60} minSize={30}>
