@@ -1,11 +1,12 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 import { useProfileStore, ProfileState, TemplateType, BadgeStyleType } from "@/store/profileStore";
 import { templates } from "@/lib/templates/index";
 import { SKILL_BADGES, SKILL_CATEGORIES } from "@/lib/skills";
-import { 
+import { Star, X, 
   User, 
   Layers, 
   Share2, 
@@ -78,6 +79,7 @@ export default function EditorPage() {
     return () => window.removeEventListener("resize", handleResize);
   }, [viewMode]);
   const [copied, setCopied] = useState(false);
+  const [showStarModal, setShowStarModal] = useState(false);
   const [htmlPreview, setHtmlPreview] = useState("");
   const [githubInput, setGithubInput] = useState(profileState.github || "");
   const [importStatus, setImportStatus] = useState<string | null>(null);
@@ -99,6 +101,7 @@ export default function EditorPage() {
     navigator.clipboard.writeText(markdownContent);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+    setTimeout(() => setShowStarModal(true), 800);
   };
 
   const handleDownload = () => {
@@ -154,7 +157,7 @@ export default function EditorPage() {
             className="p-1.5 rounded-lg transition-colors cursor-pointer"
             style={{ color: sidebarOpen ? GH.blue : GH.muted }}
           >
-            {sidebarOpen ? <PanelLeftClose className="w-5 h-5" /> : <PanelLeftOpen className="w-5 h-5" />}
+            {sidebarOpen ? <PanelLeftClose className="w-[18px] h-[18px] mb-1" /> : <PanelLeftOpen className="w-[18px] h-[18px] mb-1" />}
           </button>
 
           {/* Logo */}
@@ -278,7 +281,7 @@ export default function EditorPage() {
                   className="w-12 h-12 rounded-xl flex flex-col items-center justify-center transition-all cursor-pointer relative group font-sans hover:bg-[#21262d]"
                   style={
                     isActive
-                      ? { background: `${GH.blue}22`, color: GH.blue, border: `1px solid ${GH.blue}44` }
+                      ? { background: `${GH.blue}15`, color: GH.blue, borderColor: `${GH.blue}44` }
                       : { color: GH.muted }
                   }
                 >
@@ -286,7 +289,7 @@ export default function EditorPage() {
                   <span className="text-[8px] font-bold uppercase tracking-[0.1em] text-center truncate w-full px-1">{t.label}</span>
                   {isActive && (
                     <div
-                      className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 rounded-r-full"
+                      className="absolute -left-[1px] top-1/2 -translate-y-1/2 w-1 h-6 rounded-r-full"
                       style={{ background: GH.blue }}
                     />
                   )}
@@ -497,19 +500,19 @@ export default function EditorPage() {
                 <div className="p-4 rounded-2xl space-y-4" style={{ backgroundColor: GH.overlay, border: `1px solid ${GH.border}` }}>
                   
                   {/* Title & Selection Counter */}
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2 font-bold text-xs uppercase tracking-wider" style={{ color: GH.text }}>
-                      <Layers className="w-4 h-4" style={{ color: GH.blue }} />
-                      <span>Tech Stack & Badges</span>
+                  <div className="flex flex-wrap items-center justify-between gap-3">
+                    <div className="flex items-center gap-2 font-bold text-[11px] sm:text-xs uppercase tracking-wider" style={{ color: GH.text }}>
+                      <Layers className="w-4 h-4 shrink-0" style={{ color: GH.blue }} />
+                      <span className="truncate">Tech Stack & Badges</span>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-xs font-bold font-mono px-2 py-0.5 rounded" style={{ backgroundColor: `${GH.blue}20`, color: GH.blue }}>
+                    <div className="flex items-center gap-2 shrink-0">
+                      <span className="text-[10px] sm:text-xs font-bold font-mono px-2 py-0.5 rounded" style={{ backgroundColor: `${GH.blue}20`, color: GH.blue }}>
                         {profileState.selectedSkills.length} Selected
                       </span>
                       {profileState.selectedSkills.length > 0 && (
                         <button
                           onClick={() => profileState.updateField('selectedSkills', [])}
-                          className="text-[10px] font-bold uppercase hover:underline cursor-pointer"
+                          className="text-[10px] font-bold uppercase hover:underline cursor-pointer shrink-0"
                           style={{ color: GH.red }}
                         >
                           Clear All
@@ -943,6 +946,54 @@ export default function EditorPage() {
           padding: 8px 12px;
         }
       `}} />
-    </div>
+    
+      {/* ── STAR REPO MODAL ── */}
+      <AnimatePresence>
+        {showStarModal && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 10 }}
+              className="w-full max-w-md bg-[#161b22] border border-[#30363d] rounded-2xl shadow-2xl p-6 relative overflow-hidden font-sans"
+            >
+              <div className="absolute -top-24 -right-24 w-48 h-48 bg-[#58a6ff]/20 blur-[50px] rounded-full pointer-events-none" />
+              
+              <div className="flex justify-between items-start mb-4 relative z-10">
+                <div className="w-12 h-12 rounded-full bg-[#21262d] flex items-center justify-center border border-[#30363d]">
+                  <Star className="w-6 h-6 text-[#d29922]" fill="#d29922" />
+                </div>
+                <button onClick={() => setShowStarModal(false)} className="text-[#8b949e] hover:text-white transition-colors cursor-pointer p-1">
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              <h2 className="text-xl font-bold text-[#e6edf3] mb-2 relative z-10">Found ProfileForge useful?</h2>
+              <p className="text-sm text-[#8b949e] leading-relaxed mb-8 relative z-10">
+                If this tool saved you time or helped you build an awesome GitHub profile, please consider starring our repository. It helps us grow and keep the project 100% free and open-source!
+              </p>
+
+              <div className="flex flex-col sm:flex-row items-center gap-3 relative z-10">
+                <a 
+                  href="https://github.com/Aditya-myst/readme" 
+                  target="_blank" 
+                  rel="noreferrer"
+                  onClick={() => setShowStarModal(false)}
+                  className="flex-1 w-full flex justify-center items-center gap-2 bg-[#3fb950] hover:bg-[#2ea043] text-white font-bold py-2.5 px-4 rounded-xl transition-colors cursor-pointer shadow-lg shadow-emerald-500/10"
+                >
+                  <Star className="w-4 h-4" /> Star on GitHub
+                </a>
+                <button 
+                  onClick={() => setShowStarModal(false)}
+                  className="flex-1 w-full flex justify-center items-center bg-[#21262d] hover:bg-[#30363d] text-[#e6edf3] font-semibold py-2.5 px-4 rounded-xl transition-colors border border-[#30363d] cursor-pointer"
+                >
+                  Maybe later
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+</div>
   );
 }
