@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://raw.githubusercontent.com/Aditya-myst/readme/main/public/assets/hero.png" width="200" height="200" alt="ProfileForge Logo" style="border-radius: 50%; box-shadow: 0 0 40px rgba(88, 166, 255, 0.4);" />
+<img width="200" height="200" alt="image" src="https://github.com/user-attachments/assets/477ce375-1d9b-4036-9475-603a125f738b" />
 
   <h1 align="center">ProfileForge ✴</h1>
 
