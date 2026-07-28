@@ -65,6 +65,18 @@ export default function EditorPage() {
   const [activeTab, setActiveTab] = useState<"bio" | "skills" | "social" | "widgets" | "templates">("bio");
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [viewMode, setViewMode] = useState<"split" | "preview" | "code">("split");
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 1024 && viewMode === "split") {
+        setViewMode("preview");
+        setSidebarOpen(false); // Auto close sidebar on mobile
+      }
+    };
+    handleResize(); // initial check
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [viewMode]);
   const [copied, setCopied] = useState(false);
   const [htmlPreview, setHtmlPreview] = useState("");
   const [githubInput, setGithubInput] = useState(profileState.github || "");
@@ -131,41 +143,29 @@ export default function EditorPage() {
     >
       {/* ── TOP HEADER BAR ── */}
       <header
-        className="h-14 flex items-center justify-between px-5 z-20 shrink-0 select-none"
+        className="h-14 flex items-center justify-between px-5 z-20 shrink-0 select-none overflow-x-auto"
         style={{ background: GH.surface, borderBottom: `1px solid ${GH.border}` }}
       >
         <div className="flex items-center gap-3">
-          {/* Logo Icon Only (No text) */}
-          <Link href="/" title="Go to Home" className="flex items-center">
-            <LayoutTemplate className="w-[18px] h-[18px] mb-1" style={{ color: GH.blue }} />
+          {/* Sidebar Toggle */}
+          <button
+            onClick={() => setSidebarOpen(!sidebarOpen)}
+            title={sidebarOpen ? "Collapse Panel" : "Expand Panel"}
+            className="p-1.5 rounded-lg transition-colors cursor-pointer"
+            style={{ color: sidebarOpen ? GH.blue : GH.muted }}
+          >
+            {sidebarOpen ? <PanelLeftClose className="w-5 h-5" /> : <PanelLeftOpen className="w-5 h-5" />}
+          </button>
+
+          {/* Logo */}
+          <Link href="/" title="Go to Home" className="flex items-center gap-2 shrink-0 group">
+            <span className="text-[#58a6ff] text-2xl leading-none group-hover:rotate-180 transition-transform duration-500 inline-block">
+                ✴
+            </span>
           </Link>
         </div>
 
-        {/* GitHub Auto-Import */}
-        <form onSubmit={handleGithubImport} className="flex items-center gap-2 rounded-xl px-3 py-1" style={{ backgroundColor: GH.overlay, border: `1px solid ${GH.border}` }}>
-          <span style={{ color: GH.muted }}><GithubIcon className="w-3.5 h-3.5" /></span>
-          <input
-            type="text"
-            value={githubInput}
-            onChange={(e) => setGithubInput(e.target.value)}
-            placeholder="enter github username..."
-            className="bg-transparent text-xs focus:outline-none w-36 sm:w-48 font-mono"
-            style={{ color: GH.text }}
-          />
-          <button
-            type="submit"
-            disabled={profileState.isGithubLoading}
-            className="px-3 py-1 rounded-lg text-xs font-bold uppercase transition-all cursor-pointer flex items-center gap-1 disabled:opacity-50 text-white"
-            style={{ backgroundColor: GH.blue }}
-          >
-            {profileState.isGithubLoading ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Sparkles className="w-3.5 h-3.5" />}
-            <span>Fetch</span>
-          </button>
-        </form>
-
-        {/* Action Buttons */}
-        <div className="flex items-center gap-2">
-          {/* Theme Toggle */}
+        <div className="flex items-center gap-2 shrink-0">
           <button
             onClick={() => profileState.updateField('previewTheme', profileState.previewTheme === 'dark' ? 'light' : 'dark')}
             title="Toggle GitHub Preview Theme"
@@ -174,10 +174,9 @@ export default function EditorPage() {
           >
             {profileState.previewTheme === 'dark' ? <Moon className="w-4 h-4" style={{ color: GH.purple }} /> : <Sun className="w-4 h-4" style={{ color: GH.orange }} />}
           </button>
-
-          {/* Reset */}
+          
           <button
-            onClick={profileState.resetDefaults}
+            onClick={() => profileState.resetDefaults()}
             title="Reset Form Data"
             className="p-2 rounded-xl transition-colors cursor-pointer flex items-center gap-1 text-xs font-bold"
             style={{ backgroundColor: GH.overlay, border: `1px solid ${GH.border}`, color: GH.muted }}
@@ -185,7 +184,6 @@ export default function EditorPage() {
             <RotateCcw className="w-3.5 h-3.5" />
           </button>
 
-          {/* Download */}
           <button
             onClick={handleDownload}
             className="px-3.5 py-1.5 text-xs font-bold tracking-wider uppercase rounded-xl transition-colors flex items-center gap-1.5 cursor-pointer"
@@ -209,7 +207,7 @@ export default function EditorPage() {
 
       {/* ── SUB-TOOLBAR ── */}
       <div
-        className="h-12 px-5 flex items-center justify-between z-10 shrink-0 select-none"
+        className="h-14 sm:h-12 px-2 sm:px-5 flex items-center justify-between z-10 shrink-0 select-none overflow-x-auto gap-2"
         style={{ background: GH.surface, borderBottom: `1px solid ${GH.border}` }}
       >
         {/* Template Selector */}

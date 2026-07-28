@@ -2,11 +2,21 @@
 import React, { useState, useRef, useEffect } from 'react';
 
 export default function SplitPane({ leftPane, rightPane }: { leftPane: React.ReactNode, rightPane: React.ReactNode }) {
-  const [leftWidth, setLeftWidth] = useState(60);
+  const [leftWidth, setLeftWidth] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const startDragging = (e: React.MouseEvent) => {
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  const startDragging = (e: React.MouseEvent | React.TouchEvent) => {
+    if (isMobile) return;
+    if ('touches' in e) return;
     e.preventDefault();
     setIsDragging(true);
   };
@@ -39,19 +49,21 @@ export default function SplitPane({ leftPane, rightPane }: { leftPane: React.Rea
   }, [isDragging]);
 
   return (
-    <div ref={containerRef} className="flex h-full w-full overflow-hidden select-none">
-      <div style={{ width: `${leftWidth}%` }} className="h-full flex flex-col overflow-hidden">
+    <div ref={containerRef} className="flex flex-col md:flex-row h-full w-full overflow-hidden select-none">
+      <div style={{ width: isMobile ? '100%' : `${leftWidth}%` }} className="h-1/2 md:h-full flex flex-col overflow-hidden w-full md:w-auto">
         {leftPane}
       </div>
       
       <div 
         onMouseDown={startDragging}
-        className={`w-[2px] cursor-col-resize flex flex-col items-center justify-center relative z-50 transition-all ${isDragging ? 'bg-[#58a6ff] w-[4px]' : 'bg-[#30363d] hover:bg-[#58a6ff] hover:w-[4px]'}`}
+        className={`hidden md:flex w-[2px] cursor-col-resize flex-col items-center justify-center relative z-50 transition-all ${isDragging ? 'bg-[#58a6ff] w-[4px]' : 'bg-[#30363d] hover:bg-[#58a6ff] hover:w-[4px]'}`}
       >
         <div className="absolute inset-y-0 -left-1 -right-1 cursor-col-resize z-50" />
       </div>
 
-      <div style={{ width: `${100 - leftWidth}%` }} className="h-full flex flex-col overflow-hidden">
+      <div className="md:hidden w-full h-[2px] bg-[#30363d] shrink-0" />
+
+      <div style={{ width: isMobile ? '100%' : `${100 - leftWidth}%` }} className="h-1/2 md:h-full flex flex-col overflow-hidden w-full md:w-auto">
         {rightPane}
       </div>
     </div>
