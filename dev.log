@@ -1,0 +1,10 @@
+
+> readme@0.1.0 dev
+> next dev
+
+▲ Next.js 16.2.10 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://169.254.0.21:3000
+✓ Ready in 389ms
+
+ GET /editor 200 in 434ms (next.js: 179ms, application-code: 254ms)

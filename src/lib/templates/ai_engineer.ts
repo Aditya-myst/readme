@@ -72,7 +72,7 @@ ${renderSkillsBadges(data.selectedSkills, data.customSkills, 'flat-square')}
 ### 📊 Vital Statistics
 
 <p align="center">
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=${data.github || 'torvalds'}&theme=radical" alt="Streak" />
+  <img src="https://github-readme-streak-stats-eight.vercel.app/?user=${data.github || 'torvalds'}&theme=radical" alt="Streak" />
 </p>
 
 <p align="center">

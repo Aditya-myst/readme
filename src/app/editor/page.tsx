@@ -721,8 +721,7 @@ export default function EditorPage() {
                     { key: 'showActivityGraph', label: '📈 Activity Timeline Graph', desc: 'Interactive contribution activity chart' },
                     { key: 'showTypingHeader', label: '⌨️ Animated Typing Header SVG', desc: 'Dynamic typing text banner' },
                     { key: 'showQuotes', label: '💬 Daily Dev Quotes Card', desc: 'Random developer inspiration quote' },
-                    { key: 'showWakaTime', label: '⏱️ WakaTime Coding Time Card', desc: 'Live weekly coding time stats' },
-                    { key: 'showSnake', label: '🐍 Contribution Grid Snake', desc: 'Animated snake eating contribution dots' },
+                    { key: 'showGithubChart', label: '📅 GitHub Contribution Calendar', desc: 'Beautiful 2D commit grid' },
                     { key: 'showVisitorCount', label: '👀 Visitor Counter Badge', desc: 'Live profile view counter' },
                   ].map((item) => (
                     <div
@@ -742,21 +741,6 @@ export default function EditorPage() {
                           className="w-4 h-4 rounded cursor-pointer accent-[#58a6ff] shrink-0 ml-3"
                         />
                       </label>
-
-                      {/* Extra input for WakaTime */}
-                      {item.key === 'showWakaTime' && profileState.showWakaTime && (
-                        <div className="mt-3 pt-2" style={{ borderTop: `1px solid ${GH.border}` }}>
-                          <label className="text-[10px] font-bold uppercase tracking-wider block mb-1" style={{ color: GH.muted }}>WakaTime Username</label>
-                          <input
-                            type="text"
-                            value={profileState.wakatimeUser}
-                            onChange={(e) => profileState.updateField('wakatimeUser', e.target.value)}
-                            placeholder={profileState.github || "username"}
-                            className="w-full rounded-xl px-3 py-1.5 text-xs font-sans focus:outline-none"
-                            style={{ backgroundColor: GH.canvas, border: `1px solid ${GH.border}`, color: GH.text }}
-                          />
-                        </div>
-                      )}
 
                       {/* Extra input for Trophies Selector */}
                       {item.key === 'showTrophies' && profileState.showTrophies && (

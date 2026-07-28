@@ -59,9 +59,9 @@ export interface ProfileState {
   selectedTrophies: string[];
   showActivityGraph: boolean;
   showQuotes: boolean;
-  showWakaTime: boolean;
-  showSnake: boolean;
-  wakatimeUser: string;
+  
+  showGithubChart: boolean;
+  
   
   // Preview & Editor preferences
   previewTheme: 'dark' | 'light';
@@ -115,9 +115,9 @@ const defaultState = {
   selectedTrophies: ['github-stars', 'commits', 'pull-requests'],
   showActivityGraph: true,
   showQuotes: false,
-  showWakaTime: false,
-  showSnake: false,
-  wakatimeUser: '',
+  
+  showGithubChart: false,
+  
   
   previewTheme: 'dark' as const,
   customMarkdown: null,
@@ -166,13 +166,14 @@ export const useProfileStore = create<ProfileState>((set, get) => ({
         ...state,
         github: profile.github,
         name: profile.name || state.name,
+        tagline: profile.bio ? profile.bio.split('\\n')[0].substring(0, 60) : state.tagline,
         about: profile.bio || state.about,
         location: profile.location || state.location,
         website: profile.website || state.website,
         twitter: profile.twitter || state.twitter,
         workingOnName: profile.workingOnName || state.workingOnName,
         workingOnUrl: profile.workingOnUrl || state.workingOnUrl,
-        selectedSkills: Array.from(new Set([...state.selectedSkills, ...profile.detectedSkills])),
+        selectedSkills: profile.detectedSkills.length > 0 ? profile.detectedSkills : state.selectedSkills,
         customMarkdown: null,
         isGithubLoading: false,
       }));

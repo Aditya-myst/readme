@@ -101,7 +101,7 @@ export const renderWidgets = (data: ProfileState) => {
   if (data.showStreak) {
     parts.push(`
 <p align="center">
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=${data.github}&theme=${data.statsTheme}&hide_border=true" alt="GitHub Streak" />
+  <img src="https://github-readme-streak-stats-eight.vercel.app/?user=${data.github}&theme=${data.statsTheme}&hide_border=true" alt="GitHub Streak" />
 </p>`);
   }
 
@@ -112,12 +112,6 @@ export const renderWidgets = (data: ProfileState) => {
 </p>`);
   }
 
-  if (data.showWakaTime) {
-    parts.push(`
-<p align="center">
-  <img src="https://denvercoder1-github-readme-stats.vercel.app/api/wakatime?username=${data.wakatimeUser || data.github}&theme=${data.statsTheme}&hide_border=true" alt="WakaTime Stats" />
-</p>`);
-  }
 
   if (data.showQuotes) {
     parts.push(`
@@ -126,10 +120,10 @@ export const renderWidgets = (data: ProfileState) => {
 </p>`);
   }
 
-  if (data.showSnake) {
+  if (data.showGithubChart) {
     parts.push(`
 <p align="center">
-  <img src="https://raw.githubusercontent.com/${data.github}/${data.github}/output/github-contribution-grid-snake.svg" alt="Contribution Snake" />
+  <img src="https://ghchart.rshah.org/${data.github || 'torvalds'}" alt="Contribution Graph" />
 </p>`);
   }
 
