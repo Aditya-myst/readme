@@ -95,7 +95,7 @@ export default function EditorPage() {
 
   useEffect(() => {
     const rawHtml = marked.parse(markdownContent);
-    const cleanHtml = typeof window !== 'undefined' ? DOMPurify.sanitize(rawHtml as string) : (rawHtml as string);
+    const cleanHtml = typeof window !== 'undefined' ? DOMPurify.sanitize(rawHtml as string, { ADD_ATTR: ['align', 'target', 'width', 'height', 'valign', 'bgcolor'] }) : (rawHtml as string);
     setHtmlPreview(cleanHtml);
   }, [markdownContent]);
 

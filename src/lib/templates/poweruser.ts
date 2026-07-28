@@ -8,7 +8,7 @@ title: "Power User (Cyberpunk)",
     render: (data: ProfileState) => `
 <p align="center">
   <a href="https://github.com/${data.github}">
-    <img src="https://readme-typing-svg.demolab.com/?lines=${encodeURIComponent(data.name)};${encodeURIComponent(data.tagline)};${encodeURIComponent(data.learning || 'Always Building')}&font=Fira+Code&center=true&width=450&height=50&color=8B5CF6&vCenter=true&pause=1000&size=22" alt="Power User Typing Header" />
+    ${data.showTypingHeader ? `<img src="https://readme-typing-svg.demolab.com/?lines=${encodeURIComponent(data.name)};${encodeURIComponent(data.tagline)};${encodeURIComponent(data.learning || 'Always Building')}&font=Fira+Code&center=true&width=450&height=50&color=8B5CF6&vCenter=true&pause=1000&size=22" alt="Power User Typing Header" />` : `<h1>${data.name}</h1>`}
   </a>
 </p>
 

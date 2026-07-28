@@ -26,10 +26,10 @@ title: "AI & ML Architect",
 </p>
 
 <p align="center">
-  <img
+  ${data.showTypingHeader ? `<img
     src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=30&pause=1200&color=36BCF7&center=true&vCenter=true&width=900&lines=${encodeURIComponent(data.tagline)};${encodeURIComponent('Building scalable architectures')};${encodeURIComponent('Open Source Contributor')}"
     alt="Typing SVG"
-  />
+  />` : `<h1>${data.name}</h1>`}
 </p>
 
 <p align="center">

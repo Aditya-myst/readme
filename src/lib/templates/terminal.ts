@@ -15,7 +15,8 @@ title: "Terminal Minimalist",
         ? allSkills.map(s => `<code>${s.toLowerCase()}</code>`).join(' ')
         : `<code>python</code> <code>typescript</code> <code>react</code> <code>node.js</code>`;
 
-      return `<h2><code>${data.name.toLowerCase()}</code></h2>
+      return `
+${data.showTypingHeader ? `\n<div align="center">\n  <img src="https://readme-typing-svg.demolab.com/?lines=${encodeURIComponent(`Hi, I'm ${data.name} 👋`)};${encodeURIComponent(data.tagline)}&font=Fira+Code&center=true&width=500&height=50&color=58a6ff&vCenter=true&size=22" alt="Typing Header" />\n</div>\n` : ''}<h2><code>${data.name.toLowerCase()}</code></h2>
 <p><code>${data.tagline.toLowerCase()}</code></p>
 
 ---

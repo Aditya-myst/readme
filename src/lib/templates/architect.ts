@@ -6,6 +6,7 @@ title: "Lead Architect",
     category: "Professional",
     description: "Structured enterprise layout with high-impact project focus & YAML config block.",
     render: (data: ProfileState) => `
+${data.showTypingHeader ? `\n<div align="center">\n  <img src="https://readme-typing-svg.demolab.com/?lines=${encodeURIComponent(`Hi, I'm ${data.name} 👋`)};${encodeURIComponent(data.tagline)}&font=Fira+Code&center=true&width=500&height=50&color=58a6ff&vCenter=true&size=22" alt="Typing Header" />\n</div>\n` : ''}
 # 🏛️ ${data.name}
 **${data.tagline}**
 

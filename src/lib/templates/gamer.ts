@@ -7,7 +7,7 @@ title: "Gamer & Streamer Dev",
     description: "Neon cyberpunk gaming theme with Twitch, Discord, and RGB vibes.",
     render: (data: ProfileState) => `
 <div align="center">
-  <img src="https://readme-typing-svg.demolab.com/?lines=${encodeURIComponent(`GAMER & DEV: ${data.name}`)};${encodeURIComponent(data.tagline)}&font=Press+Start+2P&center=true&width=500&height=50&color=00FF66&vCenter=true&size=16" alt="Gamer Header" />
+  ${data.showTypingHeader ? `<img src="https://readme-typing-svg.demolab.com/?lines=${encodeURIComponent(`GAMER & DEV: ${data.name}`)};${encodeURIComponent(data.tagline)}&font=Press+Start+2P&center=true&width=500&height=50&color=00FF66&vCenter=true&size=16" alt="Gamer Header" />` : `<h1>${data.name}</h1>`}
   <p>${renderSocialBadges(data)}</p>
 </div>
 

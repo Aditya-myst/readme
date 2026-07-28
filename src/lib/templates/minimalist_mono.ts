@@ -6,6 +6,7 @@ title: "Monospace Stack",
     category: "Minimal",
     description: "Ultra clean monospace tech stack, contribution graph, and footer with ASCII art styling.",
     render: (data: ProfileState) => `
+${data.showTypingHeader ? `\n<div align="center">\n  <img src="https://readme-typing-svg.demolab.com/?lines=${encodeURIComponent(`Hi, I'm ${data.name} 👋`)};${encodeURIComponent(data.tagline)}&font=Fira+Code&center=true&width=500&height=50&color=58a6ff&vCenter=true&size=22" alt="Typing Header" />\n</div>\n` : ''}
 <h1><code>${data.name.toLowerCase()}</code></h1>
 <p><code>${data.tagline.toLowerCase()}</code></p>
 

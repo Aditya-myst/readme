@@ -6,6 +6,7 @@ title: "Academic & Student Scholar",
     category: "Specialized",
     description: "Clean academic layout featuring university studies, internships, and projects.",
     render: (data: ProfileState) => `
+${data.showTypingHeader ? `\n<div align="center">\n  <img src="https://readme-typing-svg.demolab.com/?lines=${encodeURIComponent(`Hi, I'm ${data.name} 👋`)};${encodeURIComponent(data.tagline)}&font=Fira+Code&center=true&width=500&height=50&color=58a6ff&vCenter=true&size=22" alt="Typing Header" />\n</div>\n` : ''}
 # 🎓 ${data.name}
 **${data.tagline}**
 

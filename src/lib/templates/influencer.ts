@@ -6,6 +6,7 @@ title: "Tech Influencer",
     category: "High Density",
     description: "High-density profile with octocat mascot, quick links & badges.",
     render: (data: ProfileState) => `
+${data.showTypingHeader ? `\n<div align="center">\n  <img src="https://readme-typing-svg.demolab.com/?lines=${encodeURIComponent(`Hi, I'm ${data.name} 👋`)};${encodeURIComponent(data.tagline)}&font=Fira+Code&center=true&width=500&height=50&color=58a6ff&vCenter=true&size=22" alt="Typing Header" />\n</div>\n` : ''}
 <p align="center">
   <a href="https://github.com/${data.github}"><img src="https://img.shields.io/github/followers/${data.github}?label=Followers&style=social" alt="Followers" /></a> • 
   <a href="https://twitter.com/intent/follow?screen_name=${data.twitter}"><img src="https://img.shields.io/twitter/follow/${data.twitter}?label=%40${data.twitter}&style=social" alt="Twitter" /></a> •
