@@ -27,7 +27,7 @@ ${renderSkillsBadges(data.selectedSkills, data.customSkills, data.badgeStyle)}
 
 ${data.showStats ? `
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=${data.github}&show_icons=true&theme=radical&hide_border=true" />
+  <img src="https://denvercoder1-github-readme-stats.vercel.app/api?username=${data.github}&show_icons=true&theme=radical&hide_border=true" />
 </p>` : ''}
 `.trim()
   };

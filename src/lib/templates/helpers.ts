@@ -67,8 +67,8 @@ export const renderWidgets = (data: ProfileState) => {
   if (data.showStats || data.showTopLangs) {
     parts.push(`
 <p align="center">
-  ${data.showStats ? `<img src="https://github-readme-stats.vercel.app/api?username=${data.github}&show_icons=true&theme=${data.statsTheme}&hide_border=true" alt="GitHub Stats" height="170" />` : ''}
-  ${data.showTopLangs ? `<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=${data.github}&layout=compact&theme=${data.statsTheme}&hide_border=true" alt="Top Languages" height="170" />` : ''}
+  ${data.showStats ? `<img src="https://denvercoder1-github-readme-stats.vercel.app/api?username=${data.github}&show_icons=true&theme=${data.statsTheme}&hide_border=true" alt="GitHub Stats" height="170" />` : ''}
+  ${data.showTopLangs ? `<img src="https://denvercoder1-github-readme-stats.vercel.app/api/top-langs/?username=${data.github}&layout=compact&theme=${data.statsTheme}&hide_border=true" alt="Top Languages" height="170" />` : ''}
 </p>`);
   }
 
@@ -89,7 +89,7 @@ export const renderWidgets = (data: ProfileState) => {
   if (data.showWakaTime) {
     parts.push(`
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api/wakatime?username=${data.wakatimeUser || data.github}&theme=${data.statsTheme}&hide_border=true" alt="WakaTime Stats" />
+  <img src="https://denvercoder1-github-readme-stats.vercel.app/api/wakatime?username=${data.wakatimeUser || data.github}&theme=${data.statsTheme}&hide_border=true" alt="WakaTime Stats" />
 </p>`);
   }
 
@@ -110,7 +110,7 @@ export const renderWidgets = (data: ProfileState) => {
   if (data.showVisitorCount) {
     parts.push(`
 <p align="center">
-  <img src="https://profile-counter.glitch.me/${data.github || 'developer'}/count.svg" alt="Visitors Counter" />
+  <img src="https://komarev.com/ghpvc/?username=${data.github || "developer"}&style=flat-square&color=blue" alt="Visitors Counter" />
 </p>`);
   }
 

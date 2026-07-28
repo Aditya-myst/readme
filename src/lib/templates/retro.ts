@@ -56,7 +56,7 @@ ${renderSkillsBadges(data.selectedSkills, data.customSkills, data.badgeStyle)}
 <div align="center">
 <img height="90" alt="Thanks for visiting" width="100%" src="https://raw.githubusercontent.com/BrunnerLivio/brunnerlivio/master/images/marquee.svg" />
 <br />
-${data.showVisitorCount ? `![Visitor Count](https://profile-counter.glitch.me/${data.github || 'retro'}/count.svg)` : ''}
+${data.showVisitorCount ? `![Visitor Count](https://komarev.com/ghpvc/?username=${data.github || "developer"}&style=flat-square&color=blue)` : ''}
 <br />
 <img src="https://raw.githubusercontent.com/BrunnerLivio/brunnerlivio/master/images/notepad.gif" alt="Site created with Notepad" height="30" />
 <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>  

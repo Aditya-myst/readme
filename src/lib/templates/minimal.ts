@@ -34,6 +34,6 @@ ${data.github ? `- **GitHub:** [@${data.github}](https://github.com/${data.githu
 ${data.linkedin ? `- **LinkedIn:** [${data.linkedin}](https://linkedin.com/in/${data.linkedin})` : ''}
 ${data.twitter ? `- **Twitter/X:** [@${data.twitter}](https://twitter.com/${data.twitter})` : ''}
 
-${data.showVisitorCount ? `\n![Visitor Count](https://profile-counter.glitch.me/${data.github || 'visitor'}/count.svg)` : ''}
+${data.showVisitorCount ? `\n![Visitor Count](https://komarev.com/ghpvc/?username=${data.github || "developer"}&style=flat-square&color=blue)` : ''}
 `.trim()
   };

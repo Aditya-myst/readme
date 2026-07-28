@@ -34,7 +34,7 @@ ${renderSkillsBadges(data.selectedSkills, data.customSkills, data.badgeStyle)}
 
 ### 📊 GitHub Model Training Stats
 <p align="center">
-  ${data.showStats ? `<img src="https://github-readme-stats.vercel.app/api?username=${data.github}&show_icons=true&theme=tokyonight&hide_border=true" alt="AI Stats" />` : ''}
+  ${data.showStats ? `<img src="https://denvercoder1-github-readme-stats.vercel.app/api?username=${data.github}&show_icons=true&theme=tokyonight&hide_border=true" alt="AI Stats" />` : ''}
 </p>
 `.trim()
   };

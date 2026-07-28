@@ -30,8 +30,8 @@ ${renderSkillsBadges(data.selectedSkills, data.customSkills, data.badgeStyle)}
 
 ## 📈 Activity & Insights
 <p align="center">
-  ${data.showStats ? `<img src="https://github-readme-stats.vercel.app/api?username=${data.github}&show_icons=true&theme=dark&hide_border=true" alt="Stats" />` : ''}
-  ${data.showTopLangs ? `<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=${data.github}&layout=compact&theme=dark&hide_border=true" alt="Langs" />` : ''}
+  ${data.showStats ? `<img src="https://denvercoder1-github-readme-stats.vercel.app/api?username=${data.github}&show_icons=true&theme=dark&hide_border=true" alt="Stats" />` : ''}
+  ${data.showTopLangs ? `<img src="https://denvercoder1-github-readme-stats.vercel.app/api/top-langs/?username=${data.github}&layout=compact&theme=dark&hide_border=true" alt="Langs" />` : ''}
 </p>
 
 <p align="center">
