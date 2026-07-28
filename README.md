@@ -16,7 +16,7 @@
   </p>
 
   <h3>
-    <a href="https://readme.aditya-myst.vercel.app/">Live Demo</a>
+    <a href="https://readme-psi-virid.vercel.app/">Live Demo</a>
     <span> | </span>
     <a href="#-features">Features</a>
     <span> | </span>
@@ -29,7 +29,7 @@
 ---
 
 <div align="center">
-  <img src="https://raw.githubusercontent.com/Aditya-myst/readme/main/public/assets/screenshot1.png" alt="ProfileForge Editor Preview" style="border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.4);" />
+  <img width="1917" height="981" src="https://github.com/user-attachments/assets/5939f94b-ee19-42ee-b6c6-4ca42e5fb66e" />
 </div>
 
 ## 🚀 Overview
@@ -53,15 +53,6 @@ Gone are the days of manually assembling `img.shields.io` URLs or dealing with 5
 - 🛡️ **Fail-Safe Trophies:** We replaced the globally broken GitHub Trophy APIs with a robust manual trophy selector using custom Shield.io badges.
 - 🚀 **1-Click GitHub Deploy:** OAuth integration allows you to push your newly generated `README.md` directly to your `username/username` repository with a single click.
 - 📱 **Fully Responsive:** The editor seamlessly adapts to mobile and tablet screens, automatically toggling between configuration panels and preview modes.
-
----
-
-## 📸 Screenshots
-
-<div align="center">
-  <img src="https://raw.githubusercontent.com/Aditya-myst/readme/main/public/assets/screenshot2.png" width="48%" alt="Template Selector" style="border-radius: 12px; margin-right: 2%; box-shadow: 0 4px 12px rgba(0,0,0,0.3);" />
-  <img src="https://raw.githubusercontent.com/Aditya-myst/readme/main/public/assets/screenshot3.png" width="48%" alt="Widget Configuration" style="border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);" />
-</div>
 
 ---
 
