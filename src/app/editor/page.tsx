@@ -117,11 +117,11 @@ export default function EditorPage() {
   };
 
   const TABS = [
-    { id: "bio", label: "Bio", icon: User },
-    { id: "skills", label: "Stack", icon: Layers },
-    { id: "social", label: "Social", icon: Share2 },
-    { id: "widgets", label: "Widgets", icon: BarChart2 },
-    { id: "templates", label: "Layout", icon: LayoutTemplate },
+    { id: "bio", label: "BIO", icon: User },
+    { id: "skills", label: "STACK", icon: Layers },
+    { id: "social", label: "SOCIAL", icon: Share2 },
+    { id: "widgets", label: "WIDGETS", icon: BarChart2 },
+    { id: "templates", label: "LAYOUT", icon: LayoutTemplate },
   ] as const;
 
   return (
@@ -137,7 +137,7 @@ export default function EditorPage() {
         <div className="flex items-center gap-3">
           {/* Logo Icon Only (No text) */}
           <Link href="/" title="Go to Home" className="flex items-center">
-            <LayoutTemplate className="w-5 h-5" style={{ color: GH.blue }} />
+            <LayoutTemplate className="w-[18px] h-[18px] mb-1" style={{ color: GH.blue }} />
           </Link>
         </div>
 
@@ -277,15 +277,15 @@ export default function EditorPage() {
                     if (!sidebarOpen) setSidebarOpen(true);
                   }}
                   title={t.label}
-                  className="w-10 h-10 rounded-xl flex flex-col items-center justify-center transition-all cursor-pointer relative group font-sans"
+                  className="w-12 h-12 rounded-xl flex flex-col items-center justify-center transition-all cursor-pointer relative group font-sans hover:bg-[#21262d]"
                   style={
                     isActive
                       ? { background: `${GH.blue}22`, color: GH.blue, border: `1px solid ${GH.blue}44` }
                       : { color: GH.muted }
                   }
                 >
-                  <Icon className="w-5 h-5" />
-                  <span className="text-[9px] font-bold uppercase tracking-wider scale-90 truncate max-w-full">{t.label}</span>
+                  <Icon className="w-[18px] h-[18px] mb-1" />
+                  <span className="text-[8px] font-bold uppercase tracking-[0.1em] text-center truncate w-full px-1">{t.label}</span>
                   {isActive && (
                     <div
                       className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 rounded-r-full"
@@ -303,7 +303,7 @@ export default function EditorPage() {
             className="w-10 h-10 rounded-xl flex items-center justify-center transition-colors cursor-pointer"
             style={{ color: GH.muted }}
           >
-            {sidebarOpen ? <PanelLeftClose className="w-5 h-5" /> : <PanelLeftOpen className="w-5 h-5" />}
+            {sidebarOpen ? <PanelLeftClose className="w-[18px] h-[18px] mb-1" /> : <PanelLeftOpen className="w-[18px] h-[18px] mb-1" />}
           </button>
         </div>
 
@@ -797,7 +797,7 @@ export default function EditorPage() {
 
                 {/* ── RIGHT WORKSPACE ── */}
         <div className="flex-1 flex overflow-hidden" style={{ backgroundColor: GH.canvas }}>
-          <PanelGroup direction="horizontal" >
+          <PanelGroup direction="horizontal" className="h-full w-full">
           
           {/* PREVIEW PANEL */}
           {(viewMode === "split" || viewMode === "preview") && (
