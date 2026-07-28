@@ -2,11 +2,12 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import SplitPane from "@/components/SplitPane";
 import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 import { useProfileStore, ProfileState, TemplateType, BadgeStyleType } from "@/store/profileStore";
 import { templates } from "@/lib/templates/index";
 import { SKILL_BADGES, SKILL_CATEGORIES } from "@/lib/skills";
-import { Star, X, 
+import { Star, X,  
   User, 
   Layers, 
   Share2, 
@@ -796,17 +797,74 @@ export default function EditorPage() {
           </div>
         </div>
 
-                {/* ── RIGHT WORKSPACE ── */}
+                        {/* ── RIGHT WORKSPACE ── */}
         <div className="flex-1 flex overflow-hidden" style={{ backgroundColor: GH.canvas }}>
-          <PanelGroup direction="horizontal" className="h-full w-full">
-          
-          {/* PREVIEW PANEL */}
-          {(viewMode === "split" || viewMode === "preview") && (
-            <Panel defaultSize={viewMode === "split" ? 60 : 100} minSize={30}>
-            <div
-              className="w-full h-full flex flex-col overflow-hidden"
-            >
-              {/* Preview Header */}
+          {viewMode === "split" ? (
+            <SplitPane 
+              leftPane={
+                <div className="w-full h-full flex flex-col overflow-hidden">
+                  <div className="h-10 px-5 flex items-center justify-between text-xs font-bold uppercase tracking-[0.15em] shrink-0" style={{ background: GH.surface, borderBottom: `1px solid ${GH.border}`, color: GH.muted }}>
+                    <div className="flex items-center gap-2" style={{ color: GH.text }}>
+                      <Eye className="w-4 h-4" style={{ color: GH.green }} />
+                      <span>GitHub Visual Preview</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-[10px] font-mono">
+                      <span>THEME: {profileState.previewTheme.toUpperCase()}</span>
+                    </div>
+                  </div>
+                  <div className="flex-1 p-4 lg:p-6 overflow-y-auto custom-scrollbar" style={{ backgroundColor: GH.canvas }}>
+                    <div
+                      className={`max-w-4xl mx-auto rounded-xl p-6 lg:p-10 shadow-2xl border transition-colors duration-200 ${
+                        profileState.previewTheme === 'dark'
+                          ? 'bg-[#0d1117] text-[#c9d1d9] border-[#30363d] markdown-body-dark'
+                          : 'bg-white text-[#24292f] border-[#e1e4e8] markdown-body-light'
+                      }`}
+                      dangerouslySetInnerHTML={{ __html: htmlPreview }}
+                      style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif' }}
+                    />
+                  </div>
+                </div>
+              }
+              rightPane={
+                <div className="w-full h-full flex flex-col overflow-hidden" style={{ backgroundColor: GH.canvas }}>
+                  <div className="h-10 px-5 flex items-center justify-between text-xs font-bold uppercase tracking-[0.15em] shrink-0" style={{ background: GH.surface, borderBottom: `1px solid ${GH.border}`, color: GH.muted }}>
+                    <div className="flex items-center gap-2" style={{ color: GH.text }}>
+                      <Code2 className="w-4 h-4" style={{ color: GH.blue }} />
+                      <span>Source Code (Editable)</span>
+                    </div>
+                    {profileState.customMarkdown !== null && (
+                      <button
+                        onClick={() => profileState.setCustomMarkdown(null)}
+                        className="text-[10px] font-bold hover:underline flex items-center gap-1 cursor-pointer"
+                        style={{ color: GH.blue }}
+                      >
+                        <RefreshCw className="w-3 h-3" /> RESET TEMPLATE
+                      </button>
+                    )}
+                  </div>
+                  <div className="flex-1 relative w-full overflow-hidden">
+                    <Editor
+                      height="100%"
+                      defaultLanguage="markdown"
+                      theme="vs-dark"
+                      value={markdownContent}
+                      onChange={(val) => profileState.setCustomMarkdown(val || "")}
+                      options={{
+                        minimap: { enabled: false },
+                        wordWrap: "on",
+                        readOnly: false,
+                        padding: { top: 16 },
+                        fontSize: 13,
+                        fontFamily: "var(--font-mono)",
+                        scrollBeyondLastLine: false,
+                      }}
+                    />
+                  </div>
+                </div>
+              }
+            />
+          ) : viewMode === "preview" ? (
+            <div className="w-full h-full flex flex-col overflow-hidden">
               <div className="h-10 px-5 flex items-center justify-between text-xs font-bold uppercase tracking-[0.15em] shrink-0" style={{ background: GH.surface, borderBottom: `1px solid ${GH.border}`, color: GH.muted }}>
                 <div className="flex items-center gap-2" style={{ color: GH.text }}>
                   <Eye className="w-4 h-4" style={{ color: GH.green }} />
@@ -816,38 +874,23 @@ export default function EditorPage() {
                   <span>THEME: {profileState.previewTheme.toUpperCase()}</span>
                 </div>
               </div>
-
-              {/* Rendered Preview */}
               <div className="flex-1 p-6 overflow-y-auto custom-scrollbar" style={{ backgroundColor: GH.canvas }}>
                 <div
-                  className={`max-w-3xl mx-auto rounded-2xl p-8 shadow-2xl border transition-colors duration-200 ${
+                  className={`max-w-4xl mx-auto rounded-2xl p-10 shadow-2xl border transition-colors duration-200 ${
                     profileState.previewTheme === 'dark'
                       ? 'bg-[#0d1117] text-[#c9d1d9] border-[#30363d] markdown-body-dark'
                       : 'bg-white text-[#24292f] border-[#e1e4e8] markdown-body-light'
                   }`}
                   dangerouslySetInnerHTML={{ __html: htmlPreview }}
-                  style={{
-                    fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif'
-                  }}
+                  style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif' }}
                 />
               </div>
             </div>
-            </Panel>
-          )}
-
-          {viewMode === "split" && <PanelResizeHandle className="w-[1px] bg-[#30363d] hover:bg-[#58a6ff] hover:w-[4px] transition-all cursor-col-resize z-50 mx-0.5" />}
-
-          {/* MONACO EDITOR PANEL */}
-          {(viewMode === "split" || viewMode === "code") && (
-            <Panel defaultSize={viewMode === "split" ? 40 : 100} minSize={20}>
-            <div
-              className="w-full h-full flex flex-col overflow-hidden"
-              style={{ backgroundColor: GH.canvas }}
-            >
-              {/* Code Header */}
+          ) : (
+            <div className="w-full h-full flex flex-col overflow-hidden" style={{ backgroundColor: GH.canvas }}>
               <div className="h-10 px-5 flex items-center justify-between text-xs font-bold uppercase tracking-[0.15em] shrink-0" style={{ background: GH.surface, borderBottom: `1px solid ${GH.border}`, color: GH.muted }}>
                 <div className="flex items-center gap-2" style={{ color: GH.text }}>
-                  <Edit3 className="w-4 h-4" style={{ color: GH.blue }} />
+                  <Code2 className="w-4 h-4" style={{ color: GH.blue }} />
                   <span>Source Code (Editable)</span>
                 </div>
                 {profileState.customMarkdown !== null && (
@@ -860,9 +903,7 @@ export default function EditorPage() {
                   </button>
                 )}
               </div>
-
-              {/* Monaco */}
-              <div className="flex-1 relative w-full">
+              <div className="flex-1 relative w-full overflow-hidden">
                 <Editor
                   height="100%"
                   defaultLanguage="markdown"
@@ -874,18 +915,15 @@ export default function EditorPage() {
                     wordWrap: "on",
                     readOnly: false,
                     padding: { top: 16 },
-                    fontSize: 13,
+                    fontSize: 14,
                     fontFamily: "var(--font-mono)",
                     scrollBeyondLastLine: false,
                   }}
                 />
               </div>
             </div>
-            </Panel>
           )}
-          </PanelGroup>
         </div>
-
       </div>
 
       {/* Markdown Preview Styles */}
