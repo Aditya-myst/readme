@@ -56,6 +56,7 @@ export interface ProfileState {
   showVisitorCount: boolean;
   showTypingHeader: boolean;
   showTrophies: boolean;
+  selectedTrophies: string[];
   showActivityGraph: boolean;
   showQuotes: boolean;
   showWakaTime: boolean;
@@ -73,6 +74,7 @@ export interface ProfileState {
   // Actions
   updateField: (field: keyof ProfileState, value: any) => void;
   toggleSkill: (skillId: string) => void;
+  toggleTrophy: (trophyId: string) => void;
   setTemplate: (templateId: TemplateType) => void;
   setCustomMarkdown: (md: string | null) => void;
   importFromGithub: (username: string) => Promise<boolean>;
@@ -110,6 +112,7 @@ const defaultState = {
   showVisitorCount: true,
   showTypingHeader: true,
   showTrophies: true,
+  selectedTrophies: ['github-stars', 'commits', 'pull-requests'],
   showActivityGraph: true,
   showQuotes: false,
   showWakaTime: false,
@@ -137,6 +140,16 @@ export const useProfileStore = create<ProfileState>((set, get) => ({
       selectedSkills: exists
         ? state.selectedSkills.filter((id) => id !== skillId)
         : [...state.selectedSkills, skillId],
+      customMarkdown: null
+    };
+  }),
+
+  toggleTrophy: (trophyId) => set((state) => {
+    const exists = state.selectedTrophies.includes(trophyId);
+    return {
+      selectedTrophies: exists
+        ? state.selectedTrophies.filter((id) => id !== trophyId)
+        : [...state.selectedTrophies, trophyId],
       customMarkdown: null
     };
   }),

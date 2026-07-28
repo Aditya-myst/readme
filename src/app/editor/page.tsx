@@ -6,6 +6,7 @@ import SplitPane from "@/components/SplitPane";
 import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 import { useProfileStore, ProfileState, TemplateType, BadgeStyleType } from "@/store/profileStore";
 import { templates } from "@/lib/templates/index";
+import { TROPHY_OPTIONS } from "@/lib/templates/helpers";
 import { SKILL_BADGES, SKILL_CATEGORIES } from "@/lib/skills";
 import { Star, X,  
   User, 
@@ -754,6 +755,29 @@ export default function EditorPage() {
                             className="w-full rounded-xl px-3 py-1.5 text-xs font-sans focus:outline-none"
                             style={{ backgroundColor: GH.canvas, border: `1px solid ${GH.border}`, color: GH.text }}
                           />
+                        </div>
+                      )}
+
+                      {/* Extra input for Trophies Selector */}
+                      {item.key === 'showTrophies' && profileState.showTrophies && (
+                        <div className="mt-3 pt-3" style={{ borderTop: `1px solid ${GH.border}` }}>
+                          <label className="text-[10px] font-bold uppercase tracking-wider block mb-2" style={{ color: GH.muted }}>Select Displayed Trophies</label>
+                          <div className="flex flex-wrap gap-2">
+                            {TROPHY_OPTIONS.map((trophy) => (
+                              <button
+                                key={trophy.id}
+                                onClick={() => profileState.toggleTrophy(trophy.id)}
+                                className="px-2 py-1 rounded text-[10px] font-bold transition-colors cursor-pointer border"
+                                style={{
+                                  backgroundColor: profileState.selectedTrophies?.includes(trophy.id) ? `#${trophy.color}20` : GH.canvas,
+                                  borderColor: profileState.selectedTrophies?.includes(trophy.id) ? `#${trophy.color}` : GH.border,
+                                  color: profileState.selectedTrophies?.includes(trophy.id) ? `#${trophy.color}` : GH.subtle
+                                }}
+                              >
+                                {trophy.label}
+                              </button>
+                            ))}
+                          </div>
                         </div>
                       )}
                     </div>

@@ -1,6 +1,19 @@
 import { ProfileState, TemplateType } from "@/store/profileStore";
 import { SKILL_BADGES } from "@/lib/skills";
 
+export const TROPHY_OPTIONS = [
+  { id: 'github-stars', label: '100+ Stars', color: 'FFD700' },
+  { id: 'commits', label: '1,000+ Commits', color: '4CAF50' },
+  { id: 'pull-requests', label: '100+ PRs Merged', color: '2196F3' },
+  { id: 'issues', label: 'Bug Hunter', color: 'F44336' },
+  { id: 'repositories', label: '50+ Repos', color: '9C27B0' },
+  { id: 'followers', label: '100+ Followers', color: 'FF9800' },
+  { id: 'open-source', label: 'OS Contributor', color: '00BCD4' },
+  { id: 'pro', label: 'Pro Developer', color: '607D8B' },
+  { id: 'streak', label: 'Streak Master', color: 'FF5722' },
+  { id: 'reviews', label: 'Code Reviewer', color: '795548' }
+];
+
 // Helper to generate tech badges HTML string
 export const renderSkillsBadges = (selectedSkills: string[], customSkillsStr: string, style: string = 'for-the-badge') => {
   const badgeStyle = style || 'for-the-badge';
@@ -58,10 +71,23 @@ export const renderWidgets = (data: ProfileState) => {
   const parts: string[] = [];
 
   if (data.showTrophies) {
-    parts.push(`
+    if (data.selectedTrophies && data.selectedTrophies.length > 0) {
+      const trophyBadges = data.selectedTrophies.map(id => {
+        const t = TROPHY_OPTIONS.find(x => x.id === id);
+        if (!t) return '';
+        return `<img src="https://img.shields.io/badge/🏆_${encodeURIComponent(t.label)}-${t.color}?style=for-the-badge" alt="${t.label}" />`;
+      }).filter(Boolean).join(' ');
+
+      parts.push(`
 <p align="center">
-  <img src="https://github-profile-trophy.vercel.app/?username=${data.github}&theme=flat&no-frame=true&column=6" alt="GitHub Trophies" />
+  ${trophyBadges}
 </p>`);
+    } else {
+      parts.push(`
+<p align="center">
+  <i>(Select trophies from the editor)</i>
+</p>`);
+    }
   }
 
   if (data.showStats || data.showTopLangs) {
