@@ -36,5 +36,7 @@ ${data.linkedin ? `- **LinkedIn:** [${data.linkedin}](https://linkedin.com/in/${
 ${data.twitter ? `- **Twitter/X:** [@${data.twitter}](https://twitter.com/${data.twitter})` : ''}
 
 ${data.showVisitorCount ? `\n![Visitor Count](https://komarev.com/ghpvc/?username=${data.github || "developer"}&style=flat-square&color=blue)` : ''}
+
+${renderWidgets(data)}
 `.trim()
   };

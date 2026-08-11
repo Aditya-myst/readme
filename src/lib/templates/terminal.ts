@@ -113,6 +113,8 @@ ${skillsHtml}
   <a href="${data.linkedin ? `https://linkedin.com/in/${data.linkedin}` : '#' }"><code>linkedin</code></a> · 
   <a href="${data.twitter ? `https://twitter.com/${data.twitter}` : '#' }"><code>twitter</code></a>
 </p>
+
+${renderWidgets(data)}
 `.trim();
     }
   };

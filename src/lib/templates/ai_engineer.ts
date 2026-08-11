@@ -71,17 +71,11 @@ ${renderSkillsBadges(data.selectedSkills, data.customSkills, 'flat-square')}
 
 ### 📊 Vital Statistics
 
-<p align="center">
-  <img src="https://github-readme-streak-stats-eight.vercel.app/?user=${data.github || 'torvalds'}&theme=radical" alt="Streak" />
-</p>
 
-<p align="center">
-  <img src="https://github-readme-activity-graph.vercel.app/graph?username=${data.github || 'torvalds'}&theme=react-dark&hide_border=true&bg_color=0d1117&color=bc8cff&line=bc8cff&point=e6edf3" width="100%" alt="Contribution Graph" />
-</p>    
 
-<p align="center">
-  <img src="https://komarev.com/ghpvc/?username=${data.github || 'torvalds'}&label=PROFILE%20VIEWS&color=36BCF7&style=flat-square" alt="Views" />
-</p>
+    
+
+
 
 <p align="center">
   <img src="https://img.shields.io/badge/Code%20Time-3817%20hrs%2020%20mins-blue?style=flat" alt="Code Time" />
@@ -132,5 +126,7 @@ Star ⭐ the repos if they helped you!
 <p align="center">
   <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&height=100&section=footer&width=100" alt="Profile footer wave"/>
 </p>
+
+${renderWidgets(data)}
 `.trim()
   };

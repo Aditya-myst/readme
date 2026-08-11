@@ -27,8 +27,8 @@ ${data.showTypingHeader ? `\n<div align="center">\n  <img src="https://readme-ty
 ${renderSkillsBadges(data.selectedSkills, data.customSkills, data.badgeStyle)}
 
 ${data.showStreak ? `
-<p align="center">
-  <img src="https://github-readme-streak-stats-eight.vercel.app/?user=${data.github}&theme=dark&hide_border=true" alt="Streak" />
-</p>` : ''}
+` : ''}
+
+${renderWidgets(data)}
 `.trim()
   };

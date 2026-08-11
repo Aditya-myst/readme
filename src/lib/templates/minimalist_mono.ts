@@ -17,7 +17,7 @@ ${data.showTypingHeader ? `\n<div align="center">\n  <img src="https://readme-ty
 <br/>
 
 <div align="center">
-  <img src="https://github-readme-activity-graph.vercel.app/graph?username=${data.github || 'torvalds'}&theme=react-dark&hide_border=true&bg_color=0d1117&color=58a6ff&line=58a6ff&point=e6edf3" width="100%" alt="Contribution Graph" />
+  
 </div>
 
 <br/>
@@ -73,5 +73,7 @@ ${data.showTypingHeader ? `\n<div align="center">\n  <img src="https://readme-ty
     </td>
   </tr>
 </table>
+
+${renderWidgets(data)}
 `.trim()
   };

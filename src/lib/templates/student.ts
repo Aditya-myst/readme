@@ -28,5 +28,7 @@ ${renderSkillsBadges(data.selectedSkills, data.customSkills, data.badgeStyle)}
 
 ### 📫 Let's Connect!
 ${renderSocialBadges(data)}
+
+${renderWidgets(data)}
 `.trim()
   };

@@ -44,7 +44,9 @@ ${renderSkillsBadges([], 'raspberrypi, flipper zero, kvm, ledger, thinkpad', dat
 ---
 
 <div align="center">
-  <img src="https://denvercoder1-github-readme-stats.vercel.app/api?username=${data.github}&show_icons=true&theme=${data.statsTheme}" alt="GitHub Stats" />
+  
 </div>
+
+${renderWidgets(data)}
 `.trim()
   };

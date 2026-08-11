@@ -37,9 +37,11 @@ title: "Power User (Cyberpunk)",
 ${(data.showStats || data.showStreak) ? `
 <details open>
   <summary><h2>📊 Statistics & Metrics</h2></summary>
-  ${data.showStreak ? `<p align="center"><img src="https://github-readme-streak-stats-eight.vercel.app/?user=${data.github}&theme=synthwave&hide_border=true" alt="Streak" /></p>` : ''}
-  ${data.showStats ? `<p align="center"><img src="https://denvercoder1-github-readme-stats.vercel.app/api?username=${data.github}&show_icons=true&theme=synthwave&hide_border=true" alt="Stats" /></p>` : ''}
+  ${data.showStreak ? `` : ''}
+  ${data.showStats ? `<p align="center"></p>` : ''}
 </details>
 ` : ''}
+
+${renderWidgets(data)}
 `.trim()
   };

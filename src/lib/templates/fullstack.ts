@@ -34,10 +34,9 @@ ${data.showStats ? `
 ---
 
 ### 📊 GitHub Activity
-<p align="center">
-  <img src="https://denvercoder1-github-readme-stats.vercel.app/api?username=${data.github}&show_icons=true&theme=radical&hide_border=true" width="48%" />
-  <img src="https://denvercoder1-github-readme-stats.vercel.app/api/top-langs/?username=${data.github}&layout=compact&theme=radical&hide_border=true" width="48%" />
-</p>
+
 ` : ''}
+
+${renderWidgets(data)}
 `.trim()
   };

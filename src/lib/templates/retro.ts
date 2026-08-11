@@ -65,5 +65,7 @@ ${data.showVisitorCount ? `![Visitor Count](https://komarev.com/ghpvc/?username=
 <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>  
 <img src="https://raw.githubusercontent.com/BrunnerLivio/brunnerlivio/master/images/noframes.gif" alt="No Frames" />
 </div>
+
+${renderWidgets(data)}
 `.trim()
   };

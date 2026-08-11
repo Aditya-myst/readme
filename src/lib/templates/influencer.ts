@@ -39,15 +39,14 @@ ${renderSkillsBadges(data.selectedSkills, data.customSkills, data.badgeStyle)}
 ---
 
 ${data.showStats ? `
-<p align="center">
-  <img src="https://denvercoder1-github-readme-stats.vercel.app/api?username=${data.github}&show_icons=true&theme=tokyonight&hide_border=true" width="48%" />
-  <img src="https://denvercoder1-github-readme-stats.vercel.app/api/top-langs/?username=${data.github}&layout=compact&theme=tokyonight&hide_border=true" width="48%" />
-</p>
+
 ` : ''}
 
 ${data.showVisitorCount ? `
 <p align="center">
-  👀 <b>Profile Views:</b> <img src="https://komarev.com/ghpvc/?username=${data.github || "developer"}&style=flat-square&color=blue" alt="Views" align="center" />
+  👀 <b>Profile Views:</b> 
 </p>` : ''}
+
+${renderWidgets(data)}
 `.trim()
   };
