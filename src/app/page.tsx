@@ -595,67 +595,90 @@ export default function Page() {
                 </div>
             </section>
 
-            {/* ── FEATURE GRID ── */}
-            <section className="py-10 sm:py-16 px-5 sm:px-8">
-                <div className="max-w-7xl mx-auto">
-                    <div className="mb-12 max-w-2xl">
-                        <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight mb-4">
-                            Everything you need for a stunning README
+            {/* ── FEATURE GRID (BENTO STYLE) ── */}
+            <section className="py-16 sm:py-24 px-5 sm:px-8 relative overflow-hidden">
+                {/* Subtle background glow */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full blur-[120px] opacity-10 pointer-events-none" style={{ background: `radial-gradient(circle, ${GH.purple}, transparent)` }} />
+
+                <div className="relative max-w-7xl mx-auto">
+                    <div className="mb-16 max-w-3xl">
+                        <h2 className="text-4xl sm:text-5xl font-semibold tracking-tight mb-6 leading-tight text-transparent bg-clip-text bg-gradient-to-r from-white to-[#8b949e]">
+                            Everything you need for a <br className="hidden sm:block" />
+                            <span style={{ color: GH.blue }} className="drop-shadow-lg">stunning README</span>.
                         </h2>
-                        <p className="text-sm sm:text-base leading-relaxed" style={{ color: GH.muted }}>
-                            Our editor gives you unmatched control over your profile. Build visually, copy the markdown, and
-                            impress recruiters in minutes.
+                        <p className="text-base sm:text-lg leading-relaxed font-medium max-w-xl" style={{ color: GH.muted }}>
+                            Our bento-grid editor gives you unmatched control over your profile. Build visually, inject dynamic widgets, and impress recruiters in minutes without touching a single line of Markdown.
                         </p>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
                         {FEATURES.map((f, i) => {
                             const Icon = f.icon;
+                            let spanClass = "col-span-1";
+                            if (i === 0) spanClass = "md:col-span-2 lg:col-span-2";
+                            if (i === 5) spanClass = "md:col-span-2 lg:col-span-2";
+                            if (i === 6) spanClass = "md:col-span-2 lg:col-span-2";
+                            if (i === 7) spanClass = "md:col-span-2 lg:col-span-2";
+
                             return (
                                 <motion.div
                                     key={f.title}
-                                    initial={{ opacity: 0, y: 14 }}
+                                    initial={{ opacity: 0, y: 16 }}
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
-                                    transition={{ delay: i * 0.04 }}
-                                    whileHover={{ y: -6, scale: 1.02 }}
-                                    className="p-6 rounded-2xl space-y-4 transition-all"
-                                    style={{ backgroundColor: GH.surface, border: `1px solid ${GH.border}` }}
+                                    transition={{ delay: i * 0.05, duration: 0.5 }}
+                                    className={`relative p-8 rounded-[2rem] overflow-hidden group transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl ${spanClass}`}
+                                    style={{ backgroundColor: GH.surface, border: `1px solid ${GH.border}`, boxShadow: '0 10px 30px -10px rgba(0,0,0,0.5)' }}
                                 >
-                                    <div
-                                        className="w-11 h-11 rounded-xl flex items-center justify-center"
-                                        style={{
-                                            backgroundColor: `${f.color}18`,
-                                            border: `1px solid ${f.color}33`,
-                                            color: f.color,
-                                        }}
-                                    >
-                                        <Icon className="w-5 h-5" />
+                                    {/* Hover Radial Gradient */}
+                                    <div 
+                                        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" 
+                                        style={{ background: `radial-gradient(circle at top right, ${f.color}15, transparent 60%)` }}
+                                    />
+                                    
+                                    {/* Dot pattern for larger cards */}
+                                    {[0, 5, 6, 7].includes(i) && (
+                                        <div className="absolute inset-0 opacity-[0.03] group-hover:opacity-[0.06] transition-opacity duration-500 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '24px 24px' }} />
+                                    )}
+
+                                    <div className="relative z-10 flex flex-col h-full justify-start">
+                                        <div
+                                            className="w-14 h-14 rounded-2xl flex items-center justify-center mb-6 transition-transform duration-500 group-hover:scale-110 shadow-lg"
+                                            style={{
+                                                backgroundColor: `${f.color}18`,
+                                                border: `1px solid ${f.color}40`,
+                                                color: f.color,
+                                                boxShadow: `0 0 20px ${f.color}20`
+                                            }}
+                                        >
+                                            <Icon className="w-6 h-6" />
+                                        </div>
+                                        <h3 className="font-bold text-[22px] tracking-tight mb-3 drop-shadow-md" style={{ color: GH.text }}>{f.title}</h3>
+                                        <p className="text-[15px] leading-relaxed max-w-sm drop-shadow-sm" style={{ color: GH.muted }}>
+                                            {f.desc}
+                                        </p>
                                     </div>
-                                    <h3 className="font-bold text-[15px] tracking-tight">{f.title}</h3>
-                                    <p className="text-xs leading-relaxed" style={{ color: GH.muted }}>
-                                        {f.desc}
-                                    </p>
                                 </motion.div>
                             );
                         })}
                     </div>
 
                     {/* Stats strip */}
-                    <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
                         {[
                             { n: "100%", l: "Visual editing" },
                             { n: "300+", l: "Tech badges" },
-                            { n: "14+", l: "Templates" },
+                            { n: "18+", l: "Templates" },
                             { n: "0", l: "Syntax errors" },
                         ].map((s) => (
                             <div
                                 key={s.l}
-                                className="rounded-2xl p-6 text-center"
+                                className="rounded-[2rem] p-8 text-center relative overflow-hidden group"
                                 style={{ backgroundColor: GH.overlay, border: `1px solid ${GH.border}` }}
                             >
-                                <div className="text-3xl sm:text-4xl font-semibold tracking-tight mb-1">{s.n}</div>
-                                <div className="text-xs font-medium uppercase tracking-wider" style={{ color: GH.muted }}>
+                                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{ background: `radial-gradient(circle at center, ${GH.blue}10, transparent 70%)` }} />
+                                <div className="relative z-10 text-4xl sm:text-5xl font-semibold tracking-tight mb-2 text-transparent bg-clip-text bg-gradient-to-b from-white to-[#8b949e]">{s.n}</div>
+                                <div className="relative z-10 text-[11px] font-bold uppercase tracking-[0.2em]" style={{ color: GH.muted }}>
                                     {s.l}
                                 </div>
                             </div>
