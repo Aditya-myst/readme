@@ -107,33 +107,33 @@ const MARQUEE_ROW3 = [
 
 const TEMPLATES = [
     {
-        title: "Developer Pro",
-        desc: "Vibrant header with typing SVG, stats cards, tech badge grid, and streak graph.",
-        badges: [{ label: "POPULAR", color: GH.green }],
+        title: "AI & ML Architect",
+        desc: "High-tech animated layout with waving headers, typing SVG, and complex stats graphs.",
+        badges: [{ label: "ANIMATED", color: GH.orange }],
+        image: "/templates/ai_engineer.png",
+        span: "lg:col-span-2"
     },
     {
-        title: "Lead Architect",
-        desc: "Structured enterprise layout with high-impact project focus & YAML config block.",
-        badges: [{ label: "PROFESSIONAL", color: GH.blue }],
-    },
-    {
-        title: "Power User (Cyberpunk)",
-        desc: "Interactive collapsible details, neon badge styling, dark synthwave theme, and live activity metrics.",
-        badges: [
-            { label: "INTERACTIVE", color: GH.purple },
-            { label: "CYBERPUNK", color: GH.purple },
-        ],
+        title: "Terminal Minimalist",
+        desc: "Monospace aesthetic inspired by minimalist IDEs. Lowercase text, clean grids, and code blocks.",
+        badges: [{ label: "CLEAN", color: GH.blue }],
+        image: "/templates/terminal.png",
+        span: "lg:col-span-1"
     },
     {
         title: "Monospace Stack",
         desc: "Ultra clean monospace tech stack and footer with ASCII art styling.",
         badges: [{ label: "MINIMAL", color: GH.text }],
+        image: "/templates/minimalist_mono.png",
+        span: "lg:col-span-1"
     },
     {
-        title: "AI & ML Architect",
-        desc: "High-tech animated layout with waving headers, typing SVG, and complex stats graphs.",
-        badges: [{ label: "ANIMATED", color: GH.orange }],
-    },
+        title: "Polyglot Badges Showcase",
+        desc: "Categorized layout of tech stack badges with a clean intro and stats.",
+        badges: [{ label: "POPULAR", color: GH.green }],
+        image: "/templates/polyglot.png",
+        span: "lg:col-span-1"
+    }
 ];
 
 const FEATURES = [
@@ -529,7 +529,7 @@ export default function Page() {
                         </h2>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6">
                         {TEMPLATES.map((t, idx) => (
                             <motion.button
                                 key={t.title}
@@ -541,30 +541,40 @@ export default function Page() {
                                 whileHover={{ y: -6, scale: 1.02 }}
                                 whileTap={{ scale: 0.98 }}
                                 onClick={() => router.push("/editor")}
-                                className="text-left p-6 rounded-2xl min-h-[260px] flex flex-col justify-between cursor-pointer group transition-all"
+                                className={`text-left p-6 sm:p-8 rounded-3xl min-h-[380px] flex flex-col justify-start cursor-pointer group transition-all relative overflow-hidden ${t.span}`}
                                 style={{
                                     backgroundColor: GH.surface,
-                                    border: `1px solid ${idx === 2 ? `${GH.blue}55` : GH.border}`,
+                                    border: `1px solid ${GH.border}`,
                                 }}
                             >
-                                <div>
-                                    <h3 className="font-bold text-lg tracking-tight mb-3" style={{ color: GH.text }}>
+                                <div className="absolute inset-0 top-[120px] pointer-events-none transition-opacity duration-500 flex justify-end items-end pr-0 pb-0 overflow-hidden rounded-b-3xl">
+                                    <div className="w-full h-full relative opacity-90 group-hover:opacity-100 transition-opacity duration-300">
+                                        <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-[#161b22] to-transparent z-10" />
+                                        <img src={t.image} alt={t.title} className="absolute top-6 left-12 w-[120%] max-w-none rounded-tl-xl shadow-[0_0_50px_rgba(0,0,0,0.5)] origin-top-left rotate-2 group-hover:rotate-0 group-hover:scale-105 transition-transform duration-500" style={{ border: `1px solid ${GH.border}` }} />
+                                    </div>
+                                </div>
+                                <div className="relative z-20">
+                                    <div className="flex flex-wrap gap-2 mb-4">
+                                        {t.badges.map((b) => (
+                                            <span
+                                                key={b.label}
+                                                className="px-2.5 py-1 rounded-md text-[10px] font-bold tracking-widest uppercase"
+                                                style={{
+                                                    backgroundColor: `${b.color}22`,
+                                                    color: b.color,
+                                                    border: `1px solid ${b.color}40`,
+                                                }}
+                                            >
+                                                {b.label}
+                                            </span>
+                                        ))}
+                                    </div>
+                                    <h3 className="font-bold text-2xl tracking-tight mb-2 drop-shadow-md" style={{ color: GH.text }}>
                                         {t.title}
                                     </h3>
-                                    <p className="text-xs leading-relaxed" style={{ color: GH.muted }}>
+                                    <p className="text-sm leading-relaxed max-w-sm drop-shadow-lg font-medium" style={{ color: GH.muted }}>
                                         {t.desc}
                                     </p>
-                                </div>
-                                <div className="flex flex-wrap gap-2 mt-6">
-                                    {t.badges.map((b) => (
-                                        <span
-                                            key={b.label}
-                                            className="text-[10px] font-bold tracking-widest uppercase px-2.5 py-1 rounded-md"
-                                            style={{ backgroundColor: `${b.color}22`, color: b.color }}
-                                        >
-                                            {b.label}
-                                        </span>
-                                    ))}
                                 </div>
                             </motion.button>
                         ))}
