@@ -8,7 +8,7 @@ const CHAR_H = 12.9;
 const ROW_DELAY = 0.09;
 const FG_LIGHT = '#6e7681';
 const FG_DARK = '#c9d1d9';
-const FAMILY = "JBMono,ui-monospace,SFMono-Regular,Menlo,Consolas,&apos;Liberation Mono&apos;,monospace";
+const FAMILY = "JBMono,ui-monospace,SFMono-Regular,Menlo,Consolas,monospace";
 
 export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
@@ -39,7 +39,7 @@ export async function GET(request: Request) {
         const width = Math.floor(60 * CHAR_W + pad * 2);
         const height = lines.length * LINE_H + pad * 2;
 
-        let p = [];
+        let p: string[] = [];
         p.push(`<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" font-family="${FAMILY}">`);
         p.push(`<style>.a{fill:${FG_LIGHT}}@media(prefers-color-scheme:dark){.a{fill:${FG_DARK}}}</style>`);
 
@@ -67,7 +67,7 @@ export async function GET(request: Request) {
         console.error(e);
         const fallbackSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="724" height="883"><text x="14" y="25" fill="#c9d1d9" font-family="monospace">ASCII Portrait for ${username}</text></svg>`;
         return new NextResponse(fallbackSvg, {
-            headers: { 'Content-Type': 'image/svg+xml' }
+            headers: { 'Content-Type': 'image/svg+xml', 'Cache-Control': 'no-store' }
         });
     }
 }

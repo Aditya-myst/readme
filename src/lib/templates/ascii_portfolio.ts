@@ -13,12 +13,12 @@ export const ascii_portfolio = {
 
 <img src="https://readme.aditya-myst.vercel.app/api/ascii?username=${data.github || 'developer'}" width="460" alt="${data.name}"/>
 
-<img src="https://readme.aditya-myst.vercel.app/api/stats?username=${data.github || 'developer'}" width="620" alt="Contributions in the last year"/>
+<img src="https://denvercoder1-github-readme-stats.vercel.app/api?username=${data.github || 'developer'}&show_icons=true&theme=react-dark&hide_border=true&bg_color=0d1117" width="620" alt="Contributions in the last year"/>
 
-[${data.website ? data.website.replace(/^https?:\\/\\//, '') : \`github.com/\${data.github || 'developer'}\`}](${data.website || \`https://github.com/\${data.github || 'developer'}\`})  · 
-${data.twitter ? \`[twitter](https://twitter.com/\${data.twitter})  · \` : ''}
-${data.linkedin ? \`[linkedin](https://www.linkedin.com/in/\${data.linkedin}/)  · \` : ''}
-${data.github ? \`[github](https://github.com/\${data.github})\` : ''}
+[${data.website ? data.website.replace("https://", "") : "github.com/" + (data.github || "developer")}](${data.website || "https://github.com/" + (data.github || "developer")})  · 
+${data.twitter ? `[twitter](https://twitter.com/\${data.twitter})  · ` : ''}
+${data.linkedin ? `[linkedin](https://www.linkedin.com/in/\${data.linkedin}/)  · ` : ''}
+${data.github ? `[github](https://github.com/\${data.github})` : ''}
 
 </div>
 
