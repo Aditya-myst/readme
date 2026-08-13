@@ -16,7 +16,6 @@ import { student } from './student';
 import { terminal } from './terminal';
 import { minimalist_mono } from './minimalist_mono';
 import { ai_engineer } from './ai_engineer';
-import { ascii_portfolio } from './ascii_portfolio';
 
 export const templates: Record<TemplateType, { title: string; category: string; description: string; render: (data: ProfileState) => string }> = {
   pro,
@@ -36,5 +35,4 @@ export const templates: Record<TemplateType, { title: string; category: string; 
   terminal,
   minimalist_mono,
   ai_engineer,
-  ascii_portfolio,
 };
